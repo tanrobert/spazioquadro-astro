@@ -1,0 +1,238 @@
+---
+const products = [
+  { name: 'ALUNEXT', href: '/prodotti/alunext' },
+  { name: 'Kömmerling 76MD', href: '/prodotti/kommerling' },
+  { name: 'MAGIS 40', href: '/prodotti/magis40' },
+  { name: 'DROP UNIFORM', href: '/prodotti/drop' },
+  { name: 'AMALFI', href: '/prodotti/amalfi' },
+  { name: 'Porta MINIMA', href: '/prodotti/minima' },
+];
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'Chi Siamo', href: '/#chi-siamo' },
+  { label: 'Produzione', href: '/#produzione' },
+  { label: 'Logistica', href: '/#logistica' },
+  { label: 'Prodotti', href: '/#prodotti', dropdown: true },
+  { label: 'Supporto', href: '/#supporto' },
+  { label: 'Contatti', href: '/#contatti', cta: true },
+];
+---
+
+<nav>
+  <a class="nav-logo" href="/" aria-label="Spazio Quadro — Homepage"><img src="/src/assets/spazioquadro-logo-nav.svg" alt="" srcset=""> </a>
+
+  <ul class="nav-links">
+    {navItems.map((item) => (
+      <li class={item.dropdown ? 'has-dropdown' : ''}>
+        <a href={item.href} class={item.cta ? 'nav-cta' : ''}>
+          {item.label}
+          {item.dropdown && <span class="dropdown-arrow"></span>}
+        </a>
+        {item.dropdown && (
+          <div class="nav-dropdown">
+            {products.map((p) => (
+              <a href={p.href}>{p.name}</a>
+            ))}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/">Home</a>
+  <a href="/#chi-siamo">Chi Siamo</a>
+  <a href="/#produzione">Produzione</a>
+  <a href="/#logistica">Logistica</a>
+  <div class="mobile-dropdown-toggle" id="mobile-prodotti-toggle">
+    <a href="/#prodotti" style="border:none;padding:16px 0;">Prodotti</a>
+    <span class="mobile-arrow"></span>
+  </div>
+  <div class="mobile-submenu" id="mobile-prodotti-submenu">
+    {products.map((p) => (
+      <a href={p.href}>{p.name}</a>
+    ))}
+  </div>
+  <a href="/#supporto">Supporto</a>
+  <a href="/#contatti" class="mobile-cta">Contatti</a>
+</div>
+
+<script>
+  function initNav() {
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const toggle = document.getElementById('mobile-prodotti-toggle');
+    const submenu = document.getElementById('mobile-prodotti-submenu');
+
+    if (!hamburger || !mobileMenu) return;
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+      document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Mobile products dropdown
+    if (toggle && submenu) {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggle.classList.toggle('open');
+        submenu.classList.toggle('open');
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initNav);
+  document.addEventListener('astro:page-load', initNav);
+</script>
+
+<style>
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding: env(safe-area-inset-top) max(48px, env(safe-area-inset-right)) 0 max(48px, env(safe-area-inset-left));
+  height: calc(72px + env(safe-area-inset-top));
+  background: var(--surface-nav);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.4s ease, backdrop-filter 0.4s ease;
+}
+.nav-logo {
+  font-family:var(--font-corpo); font-size:var(--type-logo-sm); color:var(--white);
+  letter-spacing:3px; text-decoration:none;
+  width:10em; display:flex; align-items:center; gap:4px;
+}
+.nav-logo img { filter: brightness(0.6); transition: filter 0.2s; }
+.nav-logo:hover img { filter: brightness(1); }
+.nav-logo span { color:var(--accent); }
+.nav-links {
+  display:flex; gap:28px; list-style:none; align-items:center;
+}
+.nav-links > li { position: relative; }
+.nav-links > li > a {
+  color:var(--gray-light); text-decoration:none; font-size:var(--type-caption);
+  letter-spacing:1.5px; text-transform:uppercase; font-weight:500;
+  transition:color 0.2s; cursor:pointer; display:inline-flex; align-items:center; gap:4px;
+}
+.nav-links > li > a:hover { color:var(--white); }
+.nav-cta {
+  background:var(--accent) !important; color:var(--white) !important;
+  padding:10px 22px;
+}
+.nav-cta:hover { background:var(--accent-hover) !important; }
+
+.dropdown-arrow {
+  display:inline-block; width:0; height:0;
+  border-left:4px solid transparent; border-right:4px solid transparent;
+  border-top:4px solid var(--gray-light);
+  transition: transform 0.25s ease, border-color 0.2s;
+  margin-left:2px;
+}
+.nav-dropdown {
+  position:absolute; top:100%; left:50%; transform:translateX(-50%);
+  min-width:220px; background:var(--surface-nav);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border-mid);
+  padding:12px 0;
+  opacity:0; visibility:hidden;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  transform: translateX(-50%) translateY(8px);
+  pointer-events:none;
+}
+.nav-dropdown a {
+  display:block; padding:10px 24px;
+  color:var(--gray-light); text-decoration:none;
+  font-size:var(--type-caption); letter-spacing:1.5px; text-transform:uppercase;
+  font-weight:500; transition: color 0.2s, background 0.2s;
+  white-space:nowrap;
+}
+.nav-dropdown a:hover {
+  color:var(--white); background:rgba(var(--rgb-white), 0.05);
+}
+.has-dropdown:hover .nav-dropdown {
+  opacity:1; visibility:visible; pointer-events:auto;
+  transform: translateX(-50%) translateY(0);
+}
+.has-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg); border-top-color: var(--white);
+}
+
+.hamburger {
+  display:none; flex-direction:column; gap:5px;
+  cursor:pointer; padding:8px; background:none; border:none;
+  z-index:110;
+}
+.hamburger span {
+  display:block; width:24px; height:2px; background:var(--white);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity:0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display:none; position:fixed; inset:0; top:calc(72px + env(safe-area-inset-top));
+  background:var(--surface-modal);
+  backdrop-filter:blur(16px);
+  z-index:99; flex-direction:column;
+  padding:40px 32px; overflow-y:auto;
+  overscroll-behavior: contain;
+}
+.mobile-menu.active { display:flex; }
+.mobile-menu a {
+  color:var(--gray-light); text-decoration:none; font-size:var(--type-body-sm);
+  letter-spacing:2px; text-transform:uppercase; font-weight:500;
+  padding:16px 0; border-bottom:1px solid var(--border-subtle);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color:var(--white); }
+.mobile-menu .mobile-cta {
+  background:var(--accent); color:var(--white); text-align:center;
+  padding:16px; margin-top:24px; font-weight:600;
+}
+.mobile-dropdown-toggle {
+  display:flex; justify-content:space-between; align-items:center;
+  cursor:pointer;
+}
+.mobile-dropdown-toggle .mobile-arrow {
+  display:inline-block; width:0; height:0;
+  border-left:5px solid transparent; border-right:5px solid transparent;
+  border-top:5px solid var(--gray-light);
+  transition: transform 0.3s ease;
+}
+.mobile-dropdown-toggle.open .mobile-arrow { transform: rotate(180deg); }
+.mobile-submenu {
+  display:none; flex-direction:column; padding-left:20px;
+}
+.mobile-submenu.open { display:flex; }
+.mobile-submenu a {
+  font-size:var(--type-caption); padding:12px 0;
+  border-bottom:1px solid rgba(var(--rgb-white), 0.04);
+  color:var(--gray-mid);
+}
+.mobile-submenu a:hover { color:var(--accent); }
+
+@media (max-width: 1000px) {
+  nav { padding: env(safe-area-inset-top) max(24px, env(safe-area-inset-right)) 0 max(24px, env(safe-area-inset-left)); }
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+}
+</style>

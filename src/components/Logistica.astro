@@ -1,0 +1,55 @@
+---
+import { getImage } from "astro:assets";
+import logisticaimg from "../assets/spazioquadro-logistica-camion.jpg";
+
+const optimizedLogistica = await getImage({
+  src: logisticaimg,
+  format: 'webp',
+  quality: 100,
+  width: 1800,
+});
+---
+
+
+<section id="logistica">
+  <div class="logistica-grid">
+    <div class="logistica-img"><img src={optimizedLogistica.src} alt="Flotta logistica SPAZIO QUADRO" /></div>
+    <div>
+      <div class="section-tag">Logistica</div>
+      <h2 class="section-title">CONSEGNA<br>PUNTUALE.<br>OGNI VOLTA.</h2>
+      <p class="section-body">Sei camion partono ogni giorno dallo stabilimento di Itri. Consegne programmate su tutto il territorio nazionale e in tutta Europa. Per urgenze reali, consegne in 4–5 giorni lavorativi su richiesta e compatibilità di magazzino.</p>
+      <div class="lstats">
+        <div class="lstat"><div class="lstat-val">6</div><div class="lstat-label">Camion ogni giorno</div></div>
+        <div class="lstat"><div class="lstat-val">30–35</div><div class="lstat-label">Giorni standard</div></div>
+        <div class="lstat"><div class="lstat-val">4–5</div><div class="lstat-label">Giorni per urgenze</div></div>
+        <div class="lstat"><div class="lstat-val">EU</div><div class="lstat-label">Spedizioni Europa</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.logistica-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;
+}
+.logistica-img { height:500px; overflow:hidden; }
+.logistica-img img { width:100%; height:100%; object-fit:cover; transition: transform 0.6s ease, filter 0.4s ease; }
+.lstats { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:40px; }
+.lstat { background:var(--black); padding:32px 24px; color:var(--white); }
+.lstat-val {
+  font-family:var(--font-corpo); font-size:var(--type-stat);
+  color:var(--accent); letter-spacing:1px; line-height:1;
+}
+.lstat-label {
+  font-size:var(--type-tag); color:var(--gray-mid); margin-top:8px;
+  font-family:var(--font-corpo); letter-spacing:1px;
+  text-transform:uppercase; line-height:1.5;
+}
+
+@media (max-width: 900px) {
+  .logistica-grid { grid-template-columns: 1fr; gap:40px; }
+}
+@media (max-width: 600px) {
+  .lstats { grid-template-columns: 1fr; }
+}
+</style>

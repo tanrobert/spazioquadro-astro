@@ -1,0 +1,48 @@
+<section class="newsletter-section">
+  <div class="nl-text">
+    <h2>RESTA<br>AGGIORNATO.</h2>
+    <p>Novità di prodotto, aggiornamenti normativi e risorse per rivenditori.</p>
+  </div>
+  <div class="nl-form">
+    <input type="email" placeholder="La tua email professionale" aria-label="Indirizzo email" autocomplete="email" spellcheck="false" />
+    <button type="button">Iscriviti</button>
+  </div>
+</section>
+
+<style>
+.newsletter-section {
+  background:var(--accent); padding:72px 80px;
+  display:flex; align-items:center; justify-content:space-between; gap:60px;
+}
+.nl-text h2 {
+  font-family:var(--font-corpo); font-size:var(--type-display); color:var(--white);
+  letter-spacing:2px; line-height:0.95; margin-bottom:10px;
+}
+.nl-text p { color:var(--text-on-dark-70); font-size:var(--type-body-md); font-weight:300; }
+.nl-form { display:flex; gap:0; flex:1; max-width:460px; }
+.nl-form input {
+  flex:1; padding:16px 22px; border:none;
+  background:rgba(var(--rgb-white), 0.15); color:var(--white);
+  font-size:var(--type-body-sm); font-family:var(--font-corpo);
+}
+.nl-form input:focus-visible {
+  outline: 2px solid var(--white); outline-offset: 2px;
+}
+.nl-form input::placeholder { color:var(--text-on-dark-50); }
+.nl-form button {
+  background:var(--black); color:var(--white); border:none;
+  padding:16px 28px; font-size:var(--type-caption); font-weight:600;
+  letter-spacing:2px; text-transform:uppercase; cursor:pointer;
+  font-family:var(--font-corpo); transition:background 0.2s;
+}
+.nl-form button:hover { background:var(--gray-dark); }
+
+@media (max-width: 900px) {
+  .newsletter-section { flex-direction:column; padding:48px 24px; gap:24px; }
+  .nl-form { max-width:100%; }
+}
+@media (max-width: 600px) {
+  .nl-form { flex-direction:column; }
+  .nl-form button { width:100%; }
+}
+</style>

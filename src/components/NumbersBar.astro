@@ -1,0 +1,37 @@
+<div class="numbers-bar">
+  <div class="num-item"><div class="num-value">20<span>+</span></div><div class="num-label">Anni di Attività</div></div>
+  <div class="num-item"><div class="num-value">4<span>K</span></div><div class="num-label">Rivenditori Attivi</div></div>
+  <div class="num-item"><div class="num-value">100<span>+</span></div><div class="num-label">Dipendenti e Collaboratori</div></div>
+  <div class="num-item"><div class="num-value">6</div><div class="num-label">Camion Ogni Giorno</div></div>
+  <div class="num-item"><div class="num-value">15<span>K</span></div><div class="num-label">m² Produzione</div></div>
+  <div class="num-item"><div class="num-value">30<span>gg</span></div><div class="num-label">Consegna Standard</div></div>
+</div>
+
+<style>
+.numbers-bar {
+  background:var(--black); padding:48px 80px;
+  display:grid; grid-template-columns:repeat(6,1fr); gap:0;
+  border-bottom:1px solid var(--gray-dark);
+}
+.num-item {
+  padding:0 24px; border-right:1px solid var(--gray-dark); text-align:center;
+}
+.num-item:last-child { border-right:none; }
+.num-value {
+  font-family:var(--font-corpo); font-size:var(--type-h1);
+  color:var(--white); line-height:1; letter-spacing:2px;
+}
+.num-value span { color:var(--accent); }
+.num-label {
+  font-size:var(--type-label); color:var(--gray-mid); text-transform:uppercase;
+  letter-spacing:2px; margin-top:8px; font-family:var(--font-corpo); line-height:1.4;
+}
+
+@media (max-width: 900px) {
+  .numbers-bar { grid-template-columns: repeat(3, 1fr); padding:32px 24px; gap:24px; }
+  .num-item { border-right:none; padding:12px 0; }
+}
+@media (max-width: 600px) {
+  .numbers-bar { grid-template-columns: repeat(2, 1fr); }
+}
+</style>

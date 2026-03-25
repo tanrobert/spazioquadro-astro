@@ -1,0 +1,99 @@
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><img src="/src/assets/spazioquadro-logo-nav.svg" alt="" srcset=""></div>
+      <p class="footer-tagline">Produzione italiana di serramenti top di gamma per rivenditori e professionisti. Gruppo Gelfù - Itri (LT) - Dal 1936.</p>
+      <div class="footer-socials">
+        <a class="slink" href="#">in</a>
+        <a class="slink" href="#">ig</a>
+        <a class="slink" href="#">fb</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Prodotti</h4>
+      <ul>
+        <li><a href="/prodotti/alunext">ALUNEXT</a></li>
+        <li><a href="/prodotti/kommerling">Kömmerling 76MD</a></li>
+        <li><a href="/prodotti/magis40">MAGIS 40</a></li>
+        <li><a href="/prodotti/drop">DROP UNIFORM</a></li>
+        <li><a href="/prodotti/amalfi">AMALFI</a></li>
+        <li><a href="/prodotti/minima">Porta MINIMA</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Azienda</h4>
+      <ul>
+        <li><a href="/#chi-siamo">Chi Siamo</a></li>
+        <li><a href="/#certificazioni">Certificazioni</a></li>
+        <li><a href="/#marine">Zone Marine</a></li>
+        <li><a href="/#supporto">Supporto Tecnico</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contatti</h4>
+      <ul>
+        <li><a href="/#contatti">Diventa Rivenditore</a></li>
+        <li><a href="mailto:info@spazioquadro.it">info@spazioquadro.it</a></li>
+        <li><a href="#">Itri (LT) - Italia</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Note Legali</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 SPAZIO QUADRO - Gruppo Gelfù S.r.l.</span>
+    <span>Made in Italy · Itri (LT)</span>
+  </div>
+</footer>
+
+<style>
+footer {
+  background:var(--black); color:var(--gray-mid);
+  padding:64px 80px 32px; border-top:1px solid var(--gray-dark);
+}
+.footer-grid {
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:60px; margin-bottom:48px;
+}
+.footer-logo {
+  font-family:var(--font-corpo); font-size:var(--type-logo); color:var(--white);
+  letter-spacing:3px; margin-bottom:16px;
+}
+.footer-logo span { color:var(--accent); }
+.footer-tagline { font-size:var(--type-small); line-height:1.7; color:var(--gray-mid); max-width:280px; }
+.footer-socials { display:flex; gap:10px; margin-top:20px; }
+.slink {
+  width:36px; height:36px; border:1px solid var(--gray-dark);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gray-mid); text-decoration:none; font-size:var(--type-caption);
+  font-weight:600; transition:border-color 0.2s, color 0.2s;
+  font-family:var(--font-corpo);
+}
+.slink:hover { border-color:var(--accent); color:var(--accent); }
+.footer-col h4 {
+  font-size:var(--type-label); font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; color:var(--white); margin-bottom:18px;
+  font-family:var(--font-corpo);
+}
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:10px; }
+.footer-col ul li a {
+  color:var(--gray-mid); text-decoration:none; font-size:var(--type-small);
+  transition:color 0.2s; cursor:pointer;
+}
+.footer-col ul li a:hover { color:var(--white); }
+.footer-bottom {
+  padding-top:28px; border-top:1px solid var(--gray-dark);
+  display:flex; justify-content:space-between; font-size:var(--type-tag);
+  color:var(--text-dim-dark); font-family:var(--font-corpo);
+}
+
+@media (max-width: 1100px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap:40px; }
+}
+@media (max-width: 900px) {
+  footer { padding:48px 24px 24px; }
+}
+@media (max-width: 600px) {
+  .footer-grid { grid-template-columns: 1fr; gap:32px; }
+}
+</style>

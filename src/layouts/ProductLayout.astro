@@ -1,0 +1,138 @@
+---
+interface Spec {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  tipo: string;
+  nome: string;
+  subtitle: string;
+  paragraphs: string[];
+  specs: Spec[];
+  bgImage?: string;
+  logo?: string;
+}
+
+const { tipo, nome, subtitle, paragraphs, specs, bgImage = '', logo } = Astro.props;
+---
+
+<a class="back-btn" href="/#prodotti">← Torna ai Prodotti</a>
+
+<div class="product-hero">
+  <div class="product-hero-bg" style={`background-image:url('${bgImage}')`}></div>
+  <div class="product-hero-overlay"></div>
+  <div class="product-hero-content">
+    <div class="product-tipo">{tipo}</div>
+    <h1>{nome}</h1>
+    <p class="product-hero-sub">{subtitle}</p>
+  </div>
+</div>
+
+<div class="product-body">
+  <div class="product-main">
+    {paragraphs.map((p) => <p set:html={p} />)}
+    {logo && <img src={logo} alt="" class="product-logo" loading="lazy" decoding="async" />}
+  </div>
+  <div class="product-specs">
+    <h3>SPECIFICHE</h3>
+    {specs.map((s) => (
+      <div class="spec-item">
+        <div class="spec-label">{s.label}</div>
+        <div class="spec-value">{s.value}</div>
+      </div>
+    ))}
+    <div style="margin-top:32px;">
+      <a class="btn-primary" style="width:100%;text-align:center;display:block;" href="/#contatti">Richiedi Scheda Tecnica</a>
+    </div>
+  </div>
+</div>
+
+<div class="product-cta-bar">
+  <p>Vuoi ricevere la scheda tecnica completa o richiedere un preventivo?</p>
+  <a class="btn-white" href="/#contatti">Richiedi Informazioni</a>
+</div>
+
+<style>
+.back-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  color:var(--accent); font-size:var(--type-tag); font-family:var(--font-corpo);
+  letter-spacing:2px; text-transform:uppercase; cursor:pointer;
+  border:none; background:none; padding:24px 80px;
+  text-decoration:none; transition:color 0.2s;
+}
+.back-btn:hover { color:var(--black); }
+
+.product-hero {
+  height:65vh; background:var(--black); display:flex;
+  align-items:flex-end; padding:60px 80px; position:relative; overflow:hidden;
+}
+.product-hero-bg {
+  position:absolute; inset:0; background-size:cover;
+  background-position:center; filter:brightness(0.2) grayscale(20%);
+}
+.product-hero-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(var(--rgb-black), 0.97), transparent 60%);
+}
+.product-hero-content {
+  position:relative; z-index:2;
+  animation: heroFadeUp 0.9s ease forwards;
+}
+.product-tipo {
+  font-family:var(--font-corpo); font-size:var(--type-tag); color:var(--accent);
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:14px;
+}
+.product-hero h1 {
+  font-family:var(--font-corpo);
+  font-size:clamp(56px,8vw,100px); color:var(--white);
+  letter-spacing:3px; line-height:0.9; margin-bottom:18px;
+}
+.product-hero-sub {
+  font-size:var(--type-body); color:var(--gray-light); max-width:480px;
+  line-height:1.6; font-weight:300;
+}
+
+.product-body { display:grid; grid-template-columns:1fr 360px; }
+.product-main { padding:72px 80px; background:var(--white); }
+.product-main p {
+  font-size:var(--type-body); line-height:1.9; color:var(--text-dim-dark); margin-bottom:22px; font-weight:300;
+}
+.product-logo {
+  display:block; margin-top:32px;
+  width:140px; height:auto;
+  object-fit:contain; object-position:left center;
+  opacity:0.4; filter:brightness(0);
+}
+.product-specs {
+  background:var(--black); padding:60px 40px; color:var(--white);
+}
+.product-specs h3 {
+  font-family:var(--font-corpo); font-size:var(--type-h4); color:var(--white);
+  letter-spacing:2px; margin-bottom:28px;
+}
+.spec-item {
+  padding:14px 0; border-bottom:1px solid var(--gray-dark);
+  display:grid; grid-template-columns:1fr 1fr; gap:12px;
+}
+.spec-label {
+  font-size:var(--type-tag); color:var(--gray-mid); font-family:var(--font-corpo);
+  letter-spacing:1px; text-transform:uppercase;
+}
+.spec-value { font-size:var(--type-small); color:var(--white); font-weight:500; text-align:right; }
+
+.product-cta-bar {
+  background:var(--accent); padding:28px 80px; display:flex;
+  align-items:center; justify-content:space-between; gap:32px;
+}
+.product-cta-bar p { color:var(--white); font-size:var(--type-body-md); font-weight:300; }
+
+@media (max-width: 900px) {
+  .product-hero { padding:40px 24px; height:50vh; }
+  .product-body { grid-template-columns:1fr; }
+  .product-main { padding:40px 24px; }
+  .product-specs { padding:40px 24px; }
+  .product-cta-bar { padding:24px; flex-direction:column; text-align:center; }
+  .back-btn { padding:20px 24px; }
+}
+</style>

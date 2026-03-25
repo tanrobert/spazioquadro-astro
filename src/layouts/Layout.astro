@@ -1,0 +1,133 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'SPAZIO QUADRO - Serramenti B2B Made in Italy', description = 'Produzione italiana di serramenti top di gamma per rivenditori e professionisti. Gruppo Gelfù - Itri (LT) - Dal 1936.' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="color-scheme" content="dark light" />
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a href="#main" class="skip-link">Salta al contenuto principale</a>
+  <slot />
+
+  <script>
+    // Scroll-reveal observer
+    function initBlurObservers() {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (prefersReduced) return;
+      const sectionEls = document.querySelectorAll('section, .numbers-bar, .minima-section, .marine-section, .partner-section, .newsletter-section');
+
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting && !target.dataset.revealed) {
+            target.dataset.revealed = '1';
+            const title = target.querySelector<HTMLElement>('.section-title');
+            const tag   = target.querySelector<HTMLElement>('.section-tag');
+            const body  = target.querySelector<HTMLElement>('.section-body');
+            if (tag)   { tag.classList.remove('blur-hidden');   tag.classList.add('blur-visible');   tag.style.animationDelay = '0s'; }
+            if (title) { title.classList.remove('blur-hidden'); title.classList.add('blur-visible'); title.style.animationDelay = '0.1s'; }
+            if (body)  { body.classList.remove('blur-hidden');  body.classList.add('blur-visible');  body.style.animationDelay = '0.2s'; }
+          }
+        });
+      }, { threshold: 0.12 });
+
+      sectionEls.forEach((el) => {
+        sectionObserver.observe(el);
+        const title = el.querySelector<HTMLElement>('.section-title:not([data-init])');
+        const tag   = el.querySelector<HTMLElement>('.section-tag:not([data-init])');
+        const body  = el.querySelector<HTMLElement>('.section-body:not([data-init])');
+        if (title) { title.classList.add('blur-hidden'); title.dataset.init = '1'; }
+        if (tag)   { tag.classList.add('blur-hidden');   tag.dataset.init = '1'; }
+        if (body)  { body.classList.add('blur-hidden');  body.dataset.init = '1'; }
+      });
+
+      const cardEls = document.querySelectorAll('.pcard:not([data-init]), .scard:not([data-init]), .ccard:not([data-init]), .tl-item:not([data-init]), .pf:not([data-init]), .lstat:not([data-init]), .num-item:not([data-init])');
+
+      const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting && !target.dataset.revealed) {
+            const delay = parseFloat(target.dataset.delay || '0');
+            target.dataset.revealed = '1';
+            setTimeout(() => {
+              target.classList.remove('blur-hidden', 'blur-hidden-num');
+              const cls = target.classList.contains('num-item') ? 'blur-visible-num' : 'blur-visible';
+              target.classList.add(cls);
+            }, delay);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+      cardEls.forEach((el, i) => {
+        const hEl = el as HTMLElement;
+        hEl.dataset.init = '1';
+        const siblings = hEl.parentElement ? Array.from(hEl.parentElement.children) : [];
+        const idx = siblings.indexOf(hEl);
+        hEl.dataset.delay = String(idx * 50);
+        if (hEl.classList.contains('num-item')) {
+          hEl.classList.add('blur-hidden-num');
+        } else {
+          hEl.classList.add('blur-hidden');
+        }
+        cardObserver.observe(hEl);
+      });
+
+      const leftEls = document.querySelectorAll('.about-image:not([data-init]), .logistica-img:not([data-init]), .minima-img:not([data-init])');
+      const rightEls = document.querySelectorAll('.prod-image:not([data-init])');
+
+      const lrObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLElement;
+          if (entry.isIntersecting && !target.dataset.revealed) {
+            target.dataset.revealed = '1';
+            const isLeft = target.classList.contains('blur-hidden-left');
+            target.classList.remove('blur-hidden-left', 'blur-hidden-right');
+            target.classList.add(isLeft ? 'blur-visible-left' : 'blur-visible-right');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      leftEls.forEach((el) => { (el as HTMLElement).dataset.init = '1'; el.classList.add('blur-hidden-left'); lrObserver.observe(el); });
+      rightEls.forEach((el) => { (el as HTMLElement).dataset.init = '1'; el.classList.add('blur-hidden-right'); lrObserver.observe(el); });
+
+      const mapBox = document.querySelector<HTMLElement>('.map-box:not([data-init])');
+      if (mapBox) {
+        mapBox.dataset.init = '1';
+        mapBox.classList.add('blur-hidden');
+        const mapObs = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const target = entry.target as HTMLElement;
+            if (entry.isIntersecting && !target.dataset.revealed) {
+              target.dataset.revealed = '1';
+              target.classList.remove('blur-hidden');
+              target.classList.add('blur-visible');
+            }
+          });
+        }, { threshold: 0.1 });
+        mapObs.observe(mapBox);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initBlurObservers, 100);
+    });
+
+    document.addEventListener('astro:page-load', () => {
+      setTimeout(initBlurObservers, 100);
+    });
+  </script>
+</body>
+</html>

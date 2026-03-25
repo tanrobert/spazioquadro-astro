@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { getImage } from "astro:assets";
+import heroImg from '../../assets/magis40.png';
+const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 100, width: 1920 });
+---
+
+<Layout title="MAGIS 40 - SPAZIO QUADRO">
+  <Nav />
+  <ProductLayout
+    bgImage={optimizedHero.src}
+    logo="/uniform.svg"
+    tipo="Finestra - Legno + Alluminio"
+    nome="MAGIS 40"
+    subtitle="L'eleganza del legno. La protezione dell'alluminio."
+    paragraphs={[
+      "MAGIS 40 è il prodotto per chi non vuole scendere a compromessi tra estetica e durabilità. Il legno interno riscalda gli ambienti e conferisce quel carattere che il PVC non può replicare. L'alluminio esterno protegge il legno dagli agenti atmosferici eliminando la necessità di manutenzione periodica.",
+      "È il serramento che si propone nelle ristrutturazioni di pregio, nelle abitazioni dove il progettista ha un ruolo nella scelta, nei contesti dove il cliente è disposto a investire per il meglio. Per il rivenditore è un prodotto con una narrazione semplice e potente: bellezza che dura.",
+      "La struttura legno/alluminio garantisce prestazioni termiche elevate, con il legno che contribuisce naturalmente all'isolamento e l'alluminio che assicura la tenuta perimetrale nel tempo senza deformazioni."
+    ]}
+    specs={[
+      { label: 'Materiale interno', value: 'Legno certificato' },
+      { label: 'Materiale esterno', value: 'Alluminio' },
+      { label: 'Manutenzione', value: 'Minima - solo lato interno' },
+      { label: 'Applicazione', value: 'Ristrutturazione di pregio' },
+      { label: 'Zona marina', value: 'Con configurazione dedicata' },
+    ]}
+  />
+  <Footer />
+</Layout>

@@ -1,0 +1,125 @@
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-Black.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-BlackIt.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-BlackIt.woff') format('woff');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-Bold.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-BoldItalic.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-BoldItalic.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean ExtBd';
+  src: url('/fonts/CenturyGothicPaneuropean-ExtraBold.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-ExtraBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean ExtBd';
+  src: url('/fonts/CenturyGothicPaneuropean-XtraBoldIt.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-XtraBoldIt.woff') format('woff');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-Italic.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-Italic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-Light.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-LightIt.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-LightIt.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean SemBd';
+  src: url('/fonts/CenturyGothicPaneuropean-SemiBold.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean SemBd';
+  src: url('/fonts/CenturyGothicPaneuropean-SemiBoldIt.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-SemiBoldIt.woff') format('woff');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-Thin.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Century Gothic Paneuropean';
+  src: url('/fonts/CenturyGothicPaneuropean-ThinItalic.woff2') format('woff2'),
+       url('/fonts/CenturyGothicPaneuropean-ThinItalic.woff') format('woff');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}

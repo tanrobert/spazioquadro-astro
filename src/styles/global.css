@@ -1,0 +1,180 @@
+@import './fonts.css';
+
+:root {
+  /* ── Color channels ── */
+  --rgb-black:      10, 10, 10;
+  --rgb-white:      255, 255, 255;
+  --rgb-accent:     0, 102, 204;
+  --rgb-gray-light: 212, 212, 212;
+  --rgb-gray-mid:   135, 135, 135;
+  --rgb-gray-dark:  58, 53, 53;
+
+  /* ── Solid aliases ── */
+  --black:      rgb(var(--rgb-black));
+  --white:      rgb(var(--rgb-white));
+  --accent:     rgb(var(--rgb-accent));
+  --gray-light: rgb(var(--rgb-gray-light));
+  --gray-mid:   rgb(var(--rgb-gray-mid));
+  --gray-dark:  rgb(var(--rgb-gray-dark));
+  --accent-dim: rgba(var(--rgb-accent), 0.10);
+  --accent-hover: #0052a3;
+
+  /* ── Surface / overlay ── */
+  --surface-nav:   rgba(var(--rgb-black), 0.87);
+  --surface-modal: rgba(var(--rgb-black), 0.98);
+  --surface-card:  #f7f7f7;
+  --surface-alt:   #f4f4f4;
+
+  /* ── Borders ── */
+  --border-subtle: rgba(var(--rgb-white), 0.06);
+  --border-mid:    rgba(var(--rgb-white), 0.08);
+  --border-strong: rgba(var(--rgb-white), 0.20);
+  --border-input:  #ddd;
+
+  /* ── Text ── */
+  --text-on-dark-70: rgba(var(--rgb-white), 0.70);
+  --text-on-dark-50: rgba(var(--rgb-white), 0.50);
+  --text-muted:      #555;
+  --text-dim:        #888;
+  --text-dim-dark:   #444;
+
+  /* ── Type scale (16px base = 1rem) ── */
+  --type-label:   0.625rem;   /* 10px */
+  --type-tag:     0.6875rem;  /* 11px */
+  --type-caption: 0.75rem;    /* 12px */
+  --type-small:   0.8125rem;  /* 13px */
+  --type-body-sm: 0.875rem;   /* 14px */
+  --type-body-md: 0.9375rem;  /* 15px */
+  --type-body:    1rem;       /* 16px */
+  --type-body-lg: 1.0625rem;  /* 17px */
+  --type-ui:      1.125rem;   /* 18px */
+  --type-logo-sm: 1.375rem;   /* 22px */
+  --type-logo:    1.625rem;   /* 26px */
+  --type-h4:      1.75rem;    /* 28px */
+  --type-h3:      1.875rem;   /* 30px */
+  --type-h2:      2.5rem;     /* 40px */
+  --type-stat:    2.75rem;    /* 44px */
+  --type-h1:      3rem;       /* 48px */
+  --type-display: 3.25rem;    /* 52px */
+
+  /* ── Font ── */
+  --font-corpo: 'Century Gothic Paneuropean', sans-serif;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-corpo); background: var(--white); color: var(--black); overflow-x: hidden; }
+
+/* ======================== BUTTONS ======================== */
+.btn-primary {
+  background:var(--accent); color:var(--white); padding:16px 36px;
+  font-size:var(--type-caption); font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  text-decoration:none; display:inline-block;
+  transition:background 0.2s, transform 0.2s; cursor:pointer;
+  border:none; font-family:var(--font-corpo);
+}
+.btn-primary:hover { background:var(--accent-hover); transform:translateY(-1px); }
+
+.btn-outline {
+  border:1px solid rgba(var(--rgb-white), 0.30); color:var(--white); padding:16px 36px;
+  font-size:var(--type-caption); font-weight:500; letter-spacing:2px; text-transform:uppercase;
+  text-decoration:none; display:inline-block;
+  transition:border-color 0.2s, background 0.2s; cursor:pointer;
+  background:transparent;
+}
+.btn-outline:hover { border-color:var(--white); background:rgba(var(--rgb-white), 0.05); }
+
+.btn-white {
+  background:var(--white); color:var(--accent); padding:13px 28px;
+  font-size:var(--type-caption); font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  cursor:pointer; border:none; font-family:var(--font-corpo);
+  transition:background 0.2s; flex-shrink:0; text-decoration:none; display:inline-block;
+}
+.btn-white:hover { background:var(--gray-light); }
+
+/* ======================== SECTION UTILITIES ======================== */
+section { padding: 100px 80px; }
+
+.section-tag {
+  font-family:var(--font-corpo); font-size:var(--type-tag); color:var(--accent);
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:20px;
+  display:flex; align-items:center; gap:12px;
+}
+.section-tag::before {
+  content:''; display:block; width:14px; height:14px; background:var(--accent);
+}
+
+.section-title {
+  font-family:var(--font-corpo);
+  font-size:clamp(42px,5vw,72px); line-height:0.93;
+  letter-spacing:2px; margin-bottom:24px;
+  will-change: opacity, transform;
+}
+
+.section-body {
+  font-size:var(--type-body); line-height:1.85; color:var(--text-muted);
+  max-width:600px; font-weight:300;
+}
+
+/* ======================== ANIMATIONS ======================== */
+@keyframes heroFadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.blur-hidden,       .blur-visible,
+.blur-hidden-left,  .blur-visible-left,
+.blur-hidden-right, .blur-visible-right,
+.blur-hidden-num,   .blur-visible-num {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.blur-hidden       { opacity:0; transform:translateY(16px); }
+.blur-hidden-left  { opacity:0; transform:translateX(-16px); }
+.blur-hidden-right { opacity:0; transform:translateX(16px); }
+.blur-hidden-num   { opacity:0; transform:translateY(10px); }
+
+.blur-visible,
+.blur-visible-left,
+.blur-visible-right,
+.blur-visible-num  { opacity:1; transform:none; }
+
+/* ======================== RESPONSIVE ======================== */
+@media (max-width: 900px) {
+  section { padding: 60px 24px; }
+}
+
+/* ======================== TYPOGRAPHY ======================== */
+h1, h2, h3, h4 { text-wrap: balance; }
+
+/* ======================== TOUCH & INTERACTION ======================== */
+a, button, [role="button"] { touch-action: manipulation; }
+
+/* ======================== FOCUS ======================== */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ======================== SKIP LINK ======================== */
+.skip-link {
+  position: absolute; top: -100%; left: 13px;
+  padding: 8px 21px; background: var(--accent); color: var(--white);
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px;
+  z-index: 9999; transition: top 0.2s; text-decoration: none;
+}
+.skip-link:focus { top: 13px; }
+
+/* ======================== REDUCED MOTION ======================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .blur-hidden, .blur-hidden-left, .blur-hidden-right, .blur-hidden-num,
+  .blur-visible, .blur-visible-left, .blur-visible-right, .blur-visible-num {
+    opacity: 1; transform: none; transition: none;
+  }
+}

@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { getImage } from "astro:assets";
+import heroImg from '../../assets/alunext.png';
+const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 100, width: 1920 });
+---
+
+<Layout title="ALUNEXT - SPAZIO QUADRO">
+  <Nav />
+  <ProductLayout
+    bgImage={optimizedHero.src}
+    logo="/kommerling.svg"
+    tipo="Finestra - PVC + Alluminio"
+    nome="ALUNEXT"
+    subtitle="La performance del PVC con il design dell'alluminio."
+    paragraphs={[
+      "ALUNEXT combina un profilo interno in PVC ad alto isolamento con una finitura esterna in alluminio. Il cliente vede alluminio, ha le prestazioni del PVC. Per il rivenditore è un prodotto facile da posizionare nel segmento medio-alto, senza dover spiegare troppo.",
+      "Per il cliente finale significa un serramento che non richiede manutenzione all'esterno - l'alluminio non si vernicia, non si gonfia, non si corrode - mantenendo all'interno le proprietà isolanti del PVC. Una combinazione che risponde alle esigenze sia del residenziale moderno che della ristrutturazione di qualità.",
+      "Per il rivenditore, ALUNEXT è un prodotto che si posiziona con facilità nel segmento medio-alto, si vende con argomenti tecnici concreti e garantisce una marginalità coerente con il posizionamento."
+    ]}
+    specs={[
+      { label: 'Materiale interno', value: 'PVC alto isolamento' },
+      { label: 'Materiale esterno', value: 'Alluminio' },
+      { label: 'Applicazione', value: 'Residenziale / Ristrutturazione' },
+      { label: 'Zona marina', value: 'Compatibile con trattamenti' },
+    ]}
+  />
+  <Footer />
+</Layout>

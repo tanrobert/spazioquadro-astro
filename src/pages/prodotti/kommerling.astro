@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { getImage } from "astro:assets";
+import heroImg from '../../assets/76md.png';
+const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 100, width: 1920 });
+---
+
+<Layout title="KÖMMERLING 76MD - SPAZIO QUADRO">
+  <Nav />
+  <ProductLayout
+    bgImage={optimizedHero.src}
+    logo="/kommerling.svg"
+    tipo="Finestra - PVC Alto Isolamento"
+    nome="KÖMMERLING 76MD"
+    subtitle="3 guarnizioni. 6 camere. Il massimo in PVC."
+    paragraphs={[
+      "Il profilo Kömmerling 76MD è il riferimento del mercato per le prestazioni termiche in PVC. Il sistema a 3 guarnizioni garantisce una tenuta superiore rispetto ai profili standard, eliminando i ponti termici e riducendo drasticamente le dispersioni di calore.",
+      "Con 6 camere nel profilo, la trasmittanza termica raggiunge valori tra i più bassi del mercato in questa categoria. Un dato che non è solo un numero su una scheda tecnica - è un argomento di vendita concreto che il rivenditore può usare in trattativa, soprattutto in contesti di ristrutturazione con incentivi energetici.",
+      "La stabilità del profilo Kömmerling nel tempo è garantita dalla qualità della materia prima: PVC vergine, rinforzi in acciaio calibrati, finiture che mantengono colore e integrità strutturale per decenni."
+    ]}
+    specs={[
+      { label: 'Profilo', value: 'Kömmerling 76MD' },
+      { label: 'Guarnizioni', value: '3 guarnizioni perimetrali' },
+      { label: 'Camere profilo', value: '6 camere' },
+      { label: 'Trasmittanza', value: 'Valori classe A' },
+      { label: 'Applicazione', value: 'Efficienza energetica' },
+    ]}
+  />
+  <Footer />
+</Layout>

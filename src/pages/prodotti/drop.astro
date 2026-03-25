@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { getImage } from "astro:assets";
+import heroImg from '../../assets/drop.png';
+const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 100, width: 1920 });
+---
+
+<Layout title="DROP UNIFORM - SPAZIO QUADRO">
+  <Nav />
+  <ProductLayout
+    bgImage={optimizedHero.src}
+    logo="/uniform.svg"
+    tipo="Finestra - PVC + Legno - Doppio Vetro"
+    nome="DROP UNIFORM"
+    subtitle="Due materiali. Una scelta consapevole."
+    paragraphs={[
+      "DROP nasce dalla volontà di non dover scegliere tra prestazioni e estetica. All'interno il calore e la naturalezza del legno, che trasforma la finestra in un elemento di arredo oltre che di funzione. All'esterno la solidità e la stabilità del PVC, che non richiede manutenzione e resiste nel tempo.",
+      "Il sistema a doppio vetro garantisce prestazioni termiche elevate: il legno è naturalmente isolante, il PVC aggiunge stabilità strutturale e tenuta perimetrale. Per il cliente finale significa comfort reale, bollette più basse e una classe energetica che supporta ogni pratica di riqualificazione.",
+      "Per il rivenditore DROP è una proposta versatile: funziona nel residenziale moderno, nella ristrutturazione di pregio, ogni volta che il cliente vuole qualcosa di più di una finestra standard senza arrivare al prezzo del legno/alluminio puro."
+    ]}
+    specs={[
+      { label: 'Materiale interno', value: 'Legno' },
+      { label: 'Materiale esterno', value: 'PVC' },
+      { label: 'Vetro', value: 'Doppio vetro camera' },
+      { label: 'Prestazioni', value: 'Alte performance termiche' },
+      { label: 'Versatilità', value: 'Residenziale / Ristrutturazione' },
+    ]}
+  />
+  <Footer />
+</Layout>

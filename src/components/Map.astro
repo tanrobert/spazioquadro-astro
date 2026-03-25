@@ -1,0 +1,53 @@
+<section class="map-section">
+  <div class="section-tag" style="justify-content:center">Rete Rivenditori</div>
+  <h2 class="section-title" style="color:var(--white)">4.000+ PARTNER<br>IN ITALIA E IN EUROPA.</h2>
+  <div class="map-box">
+    <div class="map-bg-text">ITALIA</div>
+    <div class="map-content">
+      <div class="map-label">Rete attiva - In espansione</div>
+      <div class="map-dots">
+        <div class="mdot">Nord Italia</div>
+        <div class="mdot">Centro Italia</div>
+        <div class="mdot">Sud Italia</div>
+        <div class="mdot">Isole</div>
+        <div class="mdot">Europa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+section {
+  background:var(--black); text-align:center; padding:80px;
+}
+.map-box {
+  margin-top:48px; height:380px; background:var(--gray-dark);
+  position:relative; display:flex; align-items:center;
+  justify-content:center; overflow:hidden;
+}
+.map-bg-text {
+  font-family:var(--font-corpo); font-size:200px;
+  color:rgba(var(--rgb-white), 0.03); letter-spacing:20px; position:absolute;
+}
+.map-content {
+  position:relative; z-index:2; display:flex;
+  flex-direction:column; align-items:center; gap:20px;
+}
+.map-label {
+  font-family:var(--font-corpo); font-size:var(--type-caption); color:var(--gray-mid);
+  letter-spacing:3px; text-transform:uppercase;
+}
+.map-dots { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; }
+.mdot {
+  display:flex; align-items:center; gap:8px; color:var(--gray-light);
+  font-size:var(--type-small); font-family:var(--font-corpo); letter-spacing:1px;
+}
+.mdot::before {
+  content:''; width:8px; height:8px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 10px var(--accent); flex-shrink:0;
+}
+
+@media (max-width: 900px) {
+  section { padding:48px 24px; }
+}
+</style>

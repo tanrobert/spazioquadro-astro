@@ -1,0 +1,111 @@
+---
+import { getImage } from "astro:assets";
+import imgAlunext    from '../assets/alunext.png';
+import imgKommerling from '../assets/76md.png';
+import imgMagis40    from '../assets/magis40.png';
+import imgDrop       from '../assets/drop.png';
+import imgAmalfi     from '../assets/amalfi.png';
+import imgMinima     from '../assets/minima.png';
+
+const [oAlunext, oKommerling, oMagis40, oDrop, oAmalfi, oMinima] = await Promise.all([
+  getImage({ src: imgAlunext,    format: 'webp', quality: 100, width: 1200 }),
+  getImage({ src: imgKommerling, format: 'webp', quality: 100, width: 1200 }),
+  getImage({ src: imgMagis40,    format: 'webp', quality: 100, width: 1200 }),
+  getImage({ src: imgDrop,       format: 'webp', quality: 100, width: 1200 }),
+  getImage({ src: imgAmalfi,     format: 'webp', quality: 100, width: 1200 }),
+  getImage({ src: imgMinima,     format: 'webp', quality: 100, width: 1200 }),
+]);
+
+const products = [
+  { slug: 'alunext',    img: oAlunext.src,    tipo: 'PVC + Alluminio',            nome: 'ALUNEXT',        desc: 'PVC interno ad alto isolamento, alluminio esterno a bassa manutenzione. Design contemporaneo, prestazioni certificate.' },
+  { slug: 'kommerling', img: oKommerling.src, tipo: 'PVC - Alto Isolamento',      nome: 'KÖMMERLING 76MD',desc: '3 guarnizioni perimetrali, profilo a 6 camere. Il massimo delle prestazioni termiche e acustiche in PVC.' },
+  { slug: 'magis40',    img: oMagis40.src,    tipo: 'Legno + Alluminio',          nome: 'MAGIS 40',       desc: 'Legno interno, alluminio esterno. Per ristrutturazioni di pregio dove estetica e durabilità devono coesistere.' },
+  { slug: 'drop',       img: oDrop.src,       tipo: 'PVC + Legno - Doppio Vetro', nome: 'DROP UNIFORM',   desc: 'Due materiali, una scelta consapevole. Versatile nel posizionamento, forte negli argomenti di vendita.' },
+  { slug: 'amalfi',     img: oAmalfi.src,     tipo: 'Oscuranti - Alluminio',      nome: 'AMALFI',         desc: 'Persiane e oscuranti in alluminio. Design pulito, zero manutenzione, alta compatibilità con ambienti marini.' },
+  { slug: 'minima',     img: oMinima.src,     tipo: 'Porte Interne - Vetro',      nome: 'PORTA MINIMA',   desc: 'Design minimalista in vetro. Telaio, apertura, colore e maniglie completamente personalizzabili. 4 tipologie di apertura.', accent: true },
+];
+---
+
+<section class="prodotti-section" id="prodotti">
+  <div class="prodotti-header">
+    <div>
+      <div class="section-tag">Gamma Prodotti</div>
+      <h2 class="section-title">LE NOSTRE<br>LINEE.</h2>
+    </div>
+    <p style="max-width:320px;font-size:14px;color:var(--text-dim);line-height:1.7;font-weight:300;">Dal PVC ad alto isolamento al legno/alluminio di pregio. Ogni linea pensata per il mercato medio-alto.</p>
+  </div>
+  <div class="prodotti-grid">
+    {products.map((p) => (
+      <a class={`pcard${p.accent ? ' pcard-accent' : ''}`} href={`/prodotti/${p.slug}`}>
+        <div class="pcard-img"><img src={p.img} alt={p.nome} /></div>
+        <div class="pcard-body">
+          <div class="pcard-tipo">{p.tipo}</div>
+          <div class="pcard-nome">{p.nome}</div>
+          <div class="pcard-desc">{p.desc}</div>
+          <div class="pcard-arrow">→</div>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+.prodotti-section { background:var(--white); }
+.prodotti-header {
+  display:flex; justify-content:space-between;
+  align-items:flex-end; margin-bottom:60px;
+}
+.prodotti-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+
+.pcard {
+  background:var(--black); overflow:hidden; position:relative;
+  cursor:pointer; text-decoration:none; display:block;
+  transition:transform 0.3s;
+}
+.pcard::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(var(--rgb-white), 0.06) 0%, transparent 50%, rgba(var(--rgb-white), 0.02) 100%);
+  opacity:0; transition:opacity 0.4s ease; pointer-events:none; z-index:1;
+}
+.pcard:hover::before { opacity:1; }
+.pcard-img { height:500px; overflow:hidden; }
+.pcard-img img {
+  width:100%; height:100%; object-fit:cover;
+  filter:brightness(0.65);
+  transition:transform 0.5s, filter 0.5s;
+}
+.pcard:hover .pcard-img img { transform:scale(1.06); filter: brightness(1); }
+.pcard-body {
+  padding:28px; border-top:2px solid var(--gray-dark);
+  transition:border-color 0.3s;
+}
+.pcard:hover .pcard-body { border-color:var(--accent); }
+.pcard-tipo {
+  font-family:var(--font-corpo); font-size:var(--type-label); color:var(--accent);
+  letter-spacing:2px; text-transform:uppercase; margin-bottom:10px;
+}
+.pcard-nome {
+  font-family:var(--font-corpo); font-size:var(--type-h3); color:var(--white);
+  letter-spacing:2px; margin-bottom:10px;
+}
+.pcard-desc { font-size:var(--type-small); color:var(--gray-mid); line-height:1.6; }
+.pcard-arrow {
+  margin-top:18px; color:var(--accent); font-size:var(--type-ui);
+  display:inline-block; transition:transform 0.2s;
+}
+.pcard:hover .pcard-arrow { transform:translateX(6px); }
+
+.pcard-accent { background:var(--accent); }
+.pcard-accent .pcard-body { border-color:var(--border-strong); }
+.pcard-accent .pcard-tipo { color:var(--text-on-dark-70); }
+.pcard-accent .pcard-nome { color:var(--white); }
+.pcard-accent .pcard-desc { color:var(--text-on-dark-70); }
+.pcard-accent .pcard-arrow { color:var(--white); }
+
+@media (max-width: 1100px) {
+  .prodotti-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .prodotti-grid { grid-template-columns: 1fr; }
+}
+</style>

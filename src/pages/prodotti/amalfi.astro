@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import ProductLayout from '../../layouts/ProductLayout.astro';
+import Footer from '../../components/Footer.astro';
+import '../../styles/global.css';
+import { getImage } from "astro:assets";
+import heroImg from '../../assets/amalfi.png';
+const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 100, width: 1920 });
+---
+
+<Layout title="AMALFI - SPAZIO QUADRO">
+  <Nav />
+  <ProductLayout
+    bgImage={optimizedHero.src}
+    logo="/spazioquadro-logo-nav.svg"
+    tipo="Oscuranti - Alluminio"
+    nome="AMALFI"
+    subtitle="Oscuranti in alluminio. Design, resistenza, zero manutenzione."
+    paragraphs={[
+      "AMALFI è la linea di sistemi oscuranti in alluminio progettata per durare. Persiane e oscuranti che combinano un design pulito e contemporaneo con la resistenza strutturale dell'alluminio - un materiale che non si gonfia, non si deforma e non richiede verniciature periodiche.",
+      "La scelta dell'alluminio per gli oscuranti è una scelta di lungo periodo: resiste agli agenti atmosferici, mantiene le finiture nel tempo e garantisce un funzionamento fluido anche dopo anni di utilizzo intensivo. È qualcosa di concreto da dire al cliente: questo non si vernicia, non si deforma, non ti richiama tra tre anni.",
+      "AMALFI è disponibile in diverse configurazioni e finiture, adattabile a diversi stili architettonici. Compatibile con installazioni in zone marine grazie alla naturale resistenza dell'alluminio alla corrosione."
+    ]}
+    specs={[
+      { label: 'Materiale', value: 'Alluminio' },
+      { label: 'Manutenzione', value: 'Minima' },
+      { label: 'Finiture', value: 'Molteplici colorazioni' },
+      { label: 'Zona marina', value: 'Alta compatibilità' },
+      { label: 'Applicazione', value: 'Residenziale / Commerciale' },
+    ]}
+  />
+  <Footer />
+</Layout>

@@ -1,0 +1,65 @@
+---
+import { getImage } from "astro:assets";
+import minimaImg from '../assets/minima.png';
+const optimizedMinima = await getImage({ src: minimaImg, format: 'webp', quality: 100, width: 1200 });
+---
+
+<section class="minima-section">
+  <div class="minima-img"><img src={optimizedMinima.src} alt="Porta Minima" /></div>
+  <div class="minima-content">
+    <div class="section-tag">Featured</div>
+    <h2 class="section-title" style="color:var(--white);font-size:clamp(48px,5vw,80px)">PORTA<br>MINIMA.</h2>
+    <p style="color:var(--gray-light);font-size:15px;line-height:1.7;font-weight:300;margin-top:12px;">La porta interna in vetro completamente personalizzabile. Telaio, colore del vetro, sistema di apertura e maniglie: ogni elemento su misura per il progetto del tuo cliente.</p>
+    <div class="minima-feats">
+      <div class="mfeat"><div class="mfeat-title">Vetro Colorato</div><div class="mfeat-text">Trasparente, satinato, colorato in massa - molteplici finiture disponibili.</div></div>
+      <div class="mfeat"><div class="mfeat-title">Telaio Personalizzabile</div><div class="mfeat-text">Dimensioni e finitura su specifica del progetto.</div></div>
+      <div class="mfeat"><div class="mfeat-title">Maniglie su Misura</div><div class="mfeat-text">Selezione di accessori per ogni stile e contesto.</div></div>
+      <div class="mfeat"><div class="mfeat-title">4 Tipologie Apertura</div><div class="mfeat-text">Ogni spazio ha la soluzione giusta.</div></div>
+    </div>
+    <div class="aperture">
+      <div class="ap"><div class="ap-icon"><img src="/battente.svg" alt="Battente" /></div><div class="ap-label">Battente</div></div>
+      <div class="ap"><div class="ap-icon"><img src="/scorrimento.svg" alt="Scorrevole" /></div><div class="ap-label">Scorrevole</div></div>
+      <div class="ap"><div class="ap-icon"><img src="/pivot.svg" alt="Pivot" /></div><div class="ap-label">Pivot</div></div>
+      <div class="ap"><div class="ap-icon"><img src="/libro.svg" alt="A Libro" /></div><div class="ap-label">A Libro</div></div>
+    </div>
+    <div style="margin-top:28px;">
+      <a class="btn-primary" href="/prodotti/minima">Scopri la Porta Minima →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+.minima-section {
+  background:var(--black); display:grid; grid-template-columns:1fr 1fr;
+  min-height:620px; overflow:hidden; padding:0;
+}
+.minima-img { overflow:hidden; }
+.minima-img img { width:100%; height:100%; object-fit:cover; filter:brightness(0.55) grayscale(10%); transition: transform 0.6s ease, filter 0.4s ease; }
+.minima-content {
+  padding:80px 60px; display:flex; flex-direction:column;
+  justify-content:center; color:var(--white);
+}
+.minima-feats { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:32px; }
+.mfeat {
+  background:rgba(var(--rgb-white), 0.05); border:1px solid var(--border-mid);
+  padding:20px;
+}
+.mfeat-title { font-size:var(--type-small); font-weight:600; color:var(--white); margin-bottom:6px; }
+.mfeat-text { font-size:var(--type-caption); color:var(--gray-mid); line-height:1.6; }
+.aperture { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:28px; }
+.ap { text-align:center; padding:16px 8px; border:1px solid var(--gray-dark); }
+.ap-icon { height:56px; display:flex; align-items:center; justify-content:center; margin-bottom:8px; }
+.ap-icon img { height:56px; width:auto; }
+.ap-label {
+  font-family:var(--font-corpo); font-size:var(--type-label); color:var(--gray-mid);
+  letter-spacing:1px; text-transform:uppercase;
+}
+
+@media (max-width: 900px) {
+  .minima-section { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .minima-feats { grid-template-columns: 1fr; }
+  .aperture { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
