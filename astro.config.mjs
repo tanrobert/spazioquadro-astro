@@ -1,3 +1,8 @@
 import { defineConfig } from 'astro/config';
 
-export default defineConfig({});
+import sitemap from '@astrojs/sitemap';
+
+export default defineConfig({
+  site: 'https://spazioquadro.net',
+  integrations: [sitemap()],
+});

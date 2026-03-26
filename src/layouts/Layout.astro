@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { title = 'SPAZIO QUADRO - Serramenti B2B Made in Italy', description = 'Produzione italiana di serramenti top di gamma per rivenditori e professionisti. Gruppo Gelfù - Itri (LT) - Dal 1936.' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 <!DOCTYPE html>
 <html lang="it">
@@ -14,6 +15,43 @@ const { title = 'SPAZIO QUADRO - Serramenti B2B Made in Italy', description = 'P
   <meta name="description" content={description} />
   <meta name="color-scheme" content="dark light" />
   <title>{title}</title>
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={new URL('/og-image.jpg', Astro.site)} />
+  <meta property="og:locale" content="it_IT" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={new URL('/og-image.jpg', Astro.site)} />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json" is:inline>
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SPAZIO QUADRO",
+    "legalName": "Gruppo Gelfù S.r.l.",
+    "url": "https://spazioquadro.net",
+    "foundingDate": "1936",
+    "description": "Produzione italiana di serramenti top di gamma per rivenditori e professionisti.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Itri",
+      "addressRegion": "LT",
+      "addressCountry": "IT"
+    },
+    "email": "info@spazioquadro.net",
+    "areaServed": "IT"
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
