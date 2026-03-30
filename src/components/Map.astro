@@ -1,8 +1,14 @@
+---
+import { getImage } from "astro:assets";
+import partnerItaliaImg from "../assets/partner-eu.jpg";
+
+const optimizedPartnerMilano = await getImage({ src: partnerItaliaImg, format: 'webp', quality: 100, width: 1400 });
+---
 <section class="map-section">
   <div class="section-tag" style="justify-content:center">Rete Rivenditori</div>
   <h2 class="section-title" style="color:var(--white)">4.000+ PARTNER<br>IN ITALIA E IN EUROPA.</h2>
   <div class="map-box">
-    <div class="map-bg-text">ITALIA</div>
+    <div class="map-bg-text" style={`background-image: url('${optimizedPartnerMilano.src}')`}></div>
     <div class="map-content">
       <div class="map-label">Rete attiva - In espansione</div>
       <div class="map-dots">
@@ -21,13 +27,14 @@ section {
   background:var(--black); text-align:center; padding:80px;
 }
 .map-box {
-  margin-top:48px; height:380px; background:var(--gray-dark);
+  margin-top:48px; height:380px; background:var(--black);
   position:relative; display:flex; align-items:center;
   justify-content:center; overflow:hidden;
 }
 .map-bg-text {
-  font-family:var(--font-corpo); font-size:200px;
-  color:rgba(var(--rgb-white), 0.03); letter-spacing:20px; position:absolute;
+  position:absolute; inset:0;
+  background-size:cover; background-position:center; background-repeat:no-repeat;
+  opacity:0.15;
 }
 .map-content {
   position:relative; z-index:2; display:flex;
