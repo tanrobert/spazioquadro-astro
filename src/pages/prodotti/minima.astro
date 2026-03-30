@@ -4,9 +4,65 @@ import Nav from '../../components/Nav.astro';
 import ProductLayout from '../../layouts/ProductLayout.astro';
 import Footer from '../../components/Footer.astro';
 import '../../styles/global.css';
-import { getImage } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import heroImg from '../../assets/minima.png';
+import battente from '../../assets/battente.png';
+import scorrevoleInterno from '../../assets/scorrevole-interno-muro.png';
+import pivot from '../../assets/pivot.png';
+import scorrevoleEsterno from '../../assets/scorrevole-esterno-muro.png';
+import luceBase from '../../assets/luce.png';
+import luce1 from '../../assets/luce-1.png';
+import luce2 from '../../assets/luce-2.png';
+import luce3 from '../../assets/luce-3.png';
+import luce5 from '../../assets/luce-5.png';
+import luceWg from '../../assets/luce-wg.png';
+import anodizzatoArgento from '../../assets/anodizzato-argento.png';
+import anodizzatoNero from '../../assets/anodizzato-nero.png';
+import anodizzatoBianco from '../../assets/anodizzato-bianco.png';
+import dettaglioPorta from '../../assets/dettaglio-porta.svg?url';
+import dettaglioCover from '../../assets/dettaglio-cover-serratura.svg?url';
+import dettaglioCerniera from '../../assets/dettaglio-cerniera-book.svg?url';
+import trasparanteExtrachiaro from '../../assets/trasparante-extrachiaro.png';
+import trasparenteBronzo from '../../assets/trasparente-bronzo.png';
+import trasparenteFume from '../../assets/trasparente-fume.png';
+import satinatoGrigio from '../../assets/satinato-grigio-stopsol.png';
+import satinatoBronzo from '../../assets/satinato-bronzo.png';
+import stopsolBronzo from '../../assets/stopsol-bronzo.png';
+
 const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 100, width: 1920 });
+
+const aperture = [
+  { foto: battente, icon: '/battente.svg', label: 'A Battente' },
+  { foto: scorrevoleInterno, icon: '/scorrimento.svg', label: 'Scorrevole Interno Muro' },
+  { foto: pivot, icon: '/pivot.svg', label: 'Pivot' },
+  { foto: scorrevoleEsterno, icon: '/scorrimento.svg', label: 'Scorrevole Esterno Muro' },
+];
+
+const modelli = [
+  { img: luceBase, titolo: 'LUCE', desc: 'Anta con profilo perimetrale' },
+  { img: luce1, titolo: 'LUCE 1', desc: 'Anta con 1 profilo trasversale' },
+  { img: luce2, titolo: 'LUCE 2', desc: 'Anta con 2 profili trasversali' },
+  { img: luce3, titolo: 'LUCE 3', desc: 'Anta con 3 profili trasversali' },
+  { img: luce5, titolo: 'LUCE 5', desc: 'Anta a 5 settori' },
+  { img: luceWg, titolo: 'LUCE WG', desc: 'Anta a settori simmetrici' },
+];
+
+const finiture = [
+  { img: anodizzatoArgento, label: 'Anodizzato Argento' },
+  { img: anodizzatoNero, label: 'Anodizzato Nero' },
+  { img: anodizzatoBianco, label: 'Laccato Bianco' },
+];
+
+const finitureVetri = [
+  { img: trasparanteExtrachiaro, label: 'Trasparente Extrachiaro' },
+  { img: trasparenteBronzo,      label: 'Trasparente Bronzo' },
+  { img: trasparenteFume,        label: 'Trasparente Fumé' },
+  { img: trasparanteExtrachiaro, label: 'Satinato Bianco' },
+  { img: satinatoGrigio,         label: 'Satinato Grigio' },
+  { img: satinatoGrigio,         label: 'Stopsol Grigio' },
+  { img: satinatoBronzo,         label: 'Satinato Bronzo' },
+  { img: stopsolBronzo,          label: 'Stopsol Bronzo' },
+];
 ---
 
 <Layout title="PORTA MINIMA - SPAZIO QUADRO" description="Porta interna in vetro MINIMA: telaio ridotto all'essenziale, vetro protagonista. Battente, scorrevole, pivot o a libro. Totalmente personalizzabile. Produzione Spazio Quadro, Itri (LT).">
@@ -29,6 +85,516 @@ const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 10
       { label: 'Maniglie', value: 'Su selezione' },
       { label: 'Personalizzazione', value: 'Totale' },
     ]}
-  />
+    detailDescription={[
+      "PORTA MINIMA è il sistema in vetro a profilo ridotto all'essenziale: minimalismo, luce e leggerezza in un unico prodotto. Il telaio sottilissimo scompare alla vista, il vetro diventa protagonista assoluto e la luce attraversa gli ambienti senza interruzioni.",
+      "Ogni elemento è configurabile: vetro trasparente, satinato o colorato in massa; telaio nelle dimensioni e materiale; maniglie da una selezione di design contemporaneo; apertura a scelta tra battente, scorrevole, pivot o a libro. Un prodotto che parla da solo — il campione in showroom chiude da solo metà delle trattative.",
+    ]}
+  >
+
+    <!-- SEZIONE 1: TIPOLOGIE APERTURA ANTA -->
+    <div slot="extra" class="mn-aperture">
+      <div class="mn-section-header">
+        <span class="mn-label">Configurazione</span>
+        <h2 class="mn-title">TIPOLOGIE APERTURA ANTA</h2>
+      </div>
+      <div class="mn-aperture-grid">
+        {aperture.map((a) => (
+          <div class="mn-ap-card">
+            <div class="mn-ap-photo">
+              <Image src={a.foto} alt={a.label} width={480} height={640} loading="lazy" decoding="async" />
+            </div>
+            <div class="mn-ap-footer">
+              <img src={a.icon} alt="" class="mn-ap-icon" aria-hidden="true" loading="lazy" decoding="async" />
+              <span class="mn-ap-label">{a.label}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- SEZIONE 2: MODELLI CAROUSEL -->
+    <div slot="extra" class="mn-modelli">
+      <div class="mn-section-header mn-section-header--light">
+        <span class="mn-label">Gamma</span>
+        <h2 class="mn-title mn-title--dark">MODELLI</h2>
+      </div>
+      <div class="mn-carousel-wrapper" aria-label="Carousel modelli">
+        <button class="mn-car-btn mn-car-btn--prev" aria-label="Precedente">&#8592;</button>
+        <div class="mn-carousel-track" id="minimaCarousel">
+          {modelli.map((m, i) => (
+            <div class="mn-car-item" role="group" aria-label={`Modello ${i + 1} di ${modelli.length}`}>
+              <div class="mn-car-img-wrap">
+                <img src={m.img.src} alt={m.titolo} loading="lazy" decoding="async" />
+              </div>
+              <div class="mn-car-info">
+                <div class="mn-car-titolo">{m.titolo}</div>
+                <div class="mn-car-desc">{m.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button class="mn-car-btn mn-car-btn--next" aria-label="Successivo">&#8594;</button>
+      </div>
+      <div class="mn-modelli-banner">
+        <p>Il numero e la posizione dei profili trasversali sono completamente personalizzabili — ogni anta può essere configurata su misura in base al progetto.</p>
+      </div>
+    </div>
+
+    <!-- SEZIONE 3: FINITURE PROFILI ANTA -->
+    <div slot="extra" class="mn-finiture">
+      <div class="mn-section-header mn-section-header--light">
+        <span class="mn-label">Materiali</span>
+        <h2 class="mn-title mn-title--dark">FINITURE PROFILI ANTA / TELAIO</h2>
+      </div>
+      <div class="mn-finiture-row">
+        {finiture.map((f) => (
+          <div class="mn-finitura-card">
+            <img src={f.img.src} alt={f.label} loading="lazy" decoding="async" />
+            <span class="mn-finitura-label">{f.label}</span>
+          </div>
+        ))}
+      </div>
+      <p class="mn-finiture-note">Colorazioni alternative disponibili su richiesta</p>
+    </div>
+
+    <!-- SEZIONE 4: DETTAGLI ANTA E COVER -->
+    <div slot="extra" class="mn-dettagli">
+      <div class="mn-section-header mn-section-header--light">
+        <span class="mn-label">Dettagli</span>
+        <h2 class="mn-title mn-title--dark">DETTAGLI ANTA E COVER</h2>
+      </div>
+      <div class="mn-dettagli-body">
+        <div class="mn-dettagli-porta">
+          <img src={dettaglioPorta} alt="Illustrazione porta MINIMA" loading="lazy" decoding="async" />
+        </div>
+        <div class="mn-dettagli-tech">
+          <div class="mn-dettagli-tech-item">
+            <div class="mn-dettagli-tech-img">
+              <img src={dettaglioCover} alt="Cover serratura personalizzabile" loading="lazy" decoding="async" />
+            </div>
+            <span class="mn-dettagli-tech-label">Cover personalizzabile</span>
+          </div>
+          <div class="mn-dettagli-tech-item">
+            <div class="mn-dettagli-tech-img">
+              <img src={dettaglioCerniera} alt="Cerniera book" loading="lazy" decoding="async" />
+            </div>
+            <span class="mn-dettagli-tech-label">Cerniera Book</span>
+          </div>
+        </div>
+        <div class="mn-dettagli-testo">
+          <p>La cover della serratura e la cerniera a libro sono elementi che completano l'estetica della porta MINIMA. La cover è personalizzabile nel colore e nella finitura, coordinata al profilo dell'anta o in contrasto per un effetto ricercato.</p>
+          <p>La cerniera book garantisce un'apertura fluida e silenziosa, integrandosi senza sporgenze nel filo dell'anta — invisibile quando la porta è chiusa, elegante quando è aperta.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEZIONE 5: FINITURE VETRI -->
+    <div slot="extra" class="mn-vetri">
+      <div class="mn-section-header mn-section-header--light">
+        <span class="mn-label">Materiali</span>
+        <h2 class="mn-title mn-title--dark">FINITURE VETRI</h2>
+      </div>
+      <div class="mn-finiture-row mn-vetri-row">
+        {finitureVetri.map((f) => (
+          <div class="mn-finitura-card">
+            <img src={f.img.src} alt={f.label} loading="lazy" decoding="async" />
+            <span class="mn-finitura-label">{f.label}</span>
+          </div>
+        ))}
+      </div>
+      <p class="mn-finiture-note">Colorazioni alternative disponibili su richiesta</p>
+    </div>
+
+  </ProductLayout>
   <Footer />
 </Layout>
+
+<style>
+/* ── Shared header ── */
+.mn-section-header {
+  padding: 64px 80px 40px;
+  background: var(--black);
+}
+.mn-section-header--light {
+  background: var(--surface-alt);
+}
+.mn-label {
+  display: block;
+  font-family: var(--font-corpo);
+  font-size: var(--type-tag);
+  color: var(--accent);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.mn-title {
+  font-family: var(--font-corpo);
+  font-size: clamp(22px, 3vw, 36px);
+  color: var(--white);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-wrap: balance;
+  margin: 0;
+}
+.mn-title--dark { color: var(--black); }
+
+/* ── Sezione 1: Aperture ── */
+.mn-aperture { background: var(--black); padding-bottom: 72px; }
+.mn-aperture-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 0 80px;
+}
+.mn-ap-card {
+  background: #111;
+  border: 1px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.mn-ap-photo {
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  flex-shrink: 0;
+}
+.mn-ap-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.mn-ap-card:hover .mn-ap-photo img { transform: scale(1.04); }
+.mn-ap-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+.mn-ap-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  opacity: 1;
+
+}
+.mn-ap-label {
+  font-family: var(--font-corpo);
+  font-size: var(--type-small);
+  color: var(--gray-light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── Sezione 2: Carousel ── */
+.mn-modelli { background: var(--surface-alt); padding-bottom: 56px; }
+.mn-carousel-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 80px;
+}
+.mn-carousel-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 5 * 12px) / 6);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  gap: 12px;
+  flex: 1;
+}
+.mn-carousel-track::-webkit-scrollbar { display: none; }
+.mn-car-item {
+  scroll-snap-align: start;
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+}
+.mn-car-img-wrap {
+  aspect-ratio: 2 / 3;
+  background: var(--white);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.mn-car-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.mn-car-info {
+  padding: 16px 20px 20px;
+  border-top: 1px solid var(--border-input);
+}
+.mn-car-titolo {
+  font-family: var(--font-corpo);
+  font-size: var(--type-body-md);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--black);
+  margin-bottom: 4px;
+}
+.mn-car-desc {
+  font-size: var(--type-small);
+  color: var(--text-muted);
+  font-weight: 300;
+}
+.mn-car-btn {
+  background: none;
+  border: 1px solid var(--border-input);
+  color: var(--black);
+  font-size: 20px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+  z-index: 2;
+}
+.mn-car-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+.mn-car-btn--prev { margin-right: 16px; }
+.mn-car-btn--next { margin-left: 16px; }
+
+.mn-modelli-banner {
+  margin: 24px 80px 0;
+  background: var(--accent);
+  padding: 18px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mn-modelli-banner p {
+  font-family: var(--font-corpo);
+  font-size: var(--type-body-sm);
+  color: var(--white);
+  letter-spacing: 1px;
+  text-align: center;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ── Sezione 3: Finiture ── */
+.mn-finiture {
+  background: var(--white);
+  padding-bottom: 64px;
+}
+.mn-finiture-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding:80px;
+  flex-wrap: wrap;
+}
+.mn-finitura-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.mn-finitura-card img {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  display: block;
+}
+.mn-finitura-label {
+  font-family: var(--font-corpo);
+  font-size: var(--type-tag);
+  color: var(--black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.mn-finiture-note {
+  text-align: center;
+  font-size: var(--type-small);
+  color: var(--text-dim);
+  margin-top: 24px;
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* ── Sezione 4: Dettagli Anta e Cover ── */
+.mn-dettagli { background: var(--surface-alt); padding-bottom: 72px; }
+.mn-dettagli-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.2fr;
+  gap: 0;
+  padding: 0 80px;
+  align-items: center;
+}
+.mn-dettagli-porta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 32px;
+}
+.mn-dettagli-porta img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+.mn-dettagli-tech {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px 24px;
+  border-left: 1px solid var(--border-input);
+  border-right: 1px solid var(--border-input);
+}
+.mn-dettagli-tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.mn-dettagli-tech-img {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mn-dettagli-tech-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.mn-dettagli-tech-label {
+  font-family: var(--font-corpo);
+  font-size: var(--type-tag);
+  color: var(--black);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.mn-dettagli-testo {
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.mn-dettagli-testo p {
+  font-size: var(--type-body-sm);
+  color: var(--text-muted);
+  line-height: 1.75;
+  font-weight: 300;
+  margin: 0;
+}
+
+/* ── Sezione 5: Finiture Vetri ── */
+.mn-vetri { background: var(--white); padding-bottom: 64px; }
+.mn-vetri-row {
+  flex-wrap: wrap;
+  padding: 56px 80px;
+  justify-content: center;
+  gap: 32px 48px;
+}
+.mn-vetri .mn-finitura-label { color: var(--black); }
+.mn-vetri .mn-finiture-note { color: var(--text-dim); }
+
+/* Su desktop tutti e 6 visibili: bottoni e dots non servono */
+@media (min-width: 1101px) {
+  .mn-car-btn, .mn-car-dots { display: none; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .mn-carousel-track { grid-auto-columns: calc((100% - 2 * 12px) / 3); }
+}
+@media (max-width: 900px) {
+  .mn-section-header { padding: 48px 24px 32px; }
+  .mn-aperture-grid { grid-template-columns: repeat(2, 1fr); padding: 0 24px; }
+  .mn-carousel-wrapper { padding: 0 24px; }
+  .mn-finiture-row { padding: 24px; }
+  .mn-modelli-banner { margin: 16px 24px 0; padding: 16px 24px; }
+  .mn-dettagli-body { grid-template-columns: 1fr; padding: 0 24px; }
+  .mn-dettagli-tech { border-left: none; border-right: none; border-top: 1px solid var(--border-input); border-bottom: 1px solid var(--border-input); flex-direction: row; justify-content: center; gap: 40px; }
+  .mn-dettagli-testo { padding: 32px 24px; }
+  .mn-vetri-row { padding: 40px 24px; gap: 24px 32px; }
+}
+@media (max-width: 700px) {
+  .mn-carousel-track { grid-auto-columns: calc((100% - 12px) / 2); }
+}
+@media (max-width: 420px) {
+  .mn-carousel-track { grid-auto-columns: 100%; }
+  .mn-aperture-grid { grid-template-columns: 1fr; }
+  .mn-car-btn { display: none; }
+}
+</style>
+
+<script>
+(function () {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const track = document.getElementById('minimaCarousel');
+  if (!track) return;
+
+  const prevBtn = document.querySelector('.mn-car-btn--prev');
+  const nextBtn = document.querySelector('.mn-car-btn--next');
+  const totalItems = track.children.length;
+
+  let autoTimer: ReturnType<typeof setInterval> | null = null;
+
+  function getItemWidth(): number {
+    const first = track!.children[0];
+    return first ? first.getBoundingClientRect().width + 12 : track!.clientWidth;
+  }
+
+  function getCurrentIndex(): number {
+    return Math.round(track!.scrollLeft / getItemWidth());
+  }
+
+  function scrollToIndex(idx: number): void {
+    const clamped = Math.max(0, Math.min(idx, totalItems - 1));
+    track!.scrollTo({ left: clamped * getItemWidth(), behavior: 'smooth' });
+  }
+
+  function isScrollable(): boolean {
+    return track!.scrollWidth > track!.clientWidth + 1;
+  }
+
+  function stepNext() {
+    if (!isScrollable()) return;
+    const next = (getCurrentIndex() + 1) % totalItems;
+    scrollToIndex(next);
+  }
+
+  function startAuto() {
+    if (prefersReduced || !isScrollable()) return;
+    stopAuto();
+    autoTimer = setInterval(stepNext, 4000);
+  }
+
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { stopAuto(); scrollToIndex(getCurrentIndex() - 1); startAuto(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { stopAuto(); stepNext(); startAuto(); });
+
+  const wrapper = document.querySelector('.mn-carousel-wrapper');
+  if (wrapper) {
+    wrapper.addEventListener('mouseenter', stopAuto);
+    wrapper.addEventListener('mouseleave', startAuto);
+    wrapper.addEventListener('focusin', stopAuto);
+    wrapper.addEventListener('focusout', startAuto);
+  }
+
+  startAuto();
+})();
+</script>
