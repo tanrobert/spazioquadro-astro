@@ -106,8 +106,8 @@ section { padding: 100px 80px; }
 
 .section-title {
   font-family:var(--font-corpo);
-  font-size:clamp(42px,5vw,72px); line-height:0.93;
-  letter-spacing:2px; margin-bottom:24px;
+  font-size:clamp(42px,5vw,72px);
+  letter-spacing:2px; margin-bottom:24px; line-height:0.9;
   will-change: opacity, transform;
 }
 

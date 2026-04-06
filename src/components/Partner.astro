@@ -26,17 +26,11 @@
         <div class="fg"><label for="telefono">Telefono</label><input id="telefono" type="tel" name="telefono" placeholder="+39 000 000 0000" autocomplete="tel" /></div>
         <div class="fg"><label for="email">Email *</label><input id="email" type="email" name="email" placeholder="email@azienda.it" required autocomplete="email" spellcheck="false" /></div>
       </div>
-      <div class="fg">
-        <label for="zona">Zona di Interesse</label>
-        <select id="zona" name="zona">
-          <option value="">Seleziona regione…</option>
-          <option>Nord Italia</option>
-          <option>Centro Italia</option>
-          <option>Sud Italia</option>
-          <option>Isole</option>
-          <option>Europa</option>
-        </select>
+      <div class="fg-row">
+        <div class="fg"><label for="provincia">Provincia *</label><input id="provincia" type="text" name="provincia" placeholder="ES. MI" required autocomplete="address-level2" /></div>
+        <div class="fg"><label for="citta">Città *</label><input id="citta" type="text" name="citta" placeholder="Es. Milano" required autocomplete="address-level2" /></div>
       </div>
+      <div class="fg"><label for="indirizzo">Indirizzo *</label><input id="indirizzo" type="text" name="indirizzo" placeholder="Via, numero civico" required autocomplete="street-address" /></div>
       <div class="fg">
         <label for="tipo">Tipo di Attività</label>
         <select id="tipo" name="tipo">

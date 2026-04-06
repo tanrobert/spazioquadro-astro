@@ -40,17 +40,17 @@ const optimizedHero = await getImage({
   background:linear-gradient(to top, rgba(var(--rgb-black), 0.97) 0%, rgba(var(--rgb-black), 0.15) 65%, transparent 100%);
 }
 .hero-content {
-  position:relative; z-index:2; padding: 0 80px 80px; max-width:80em;
+  position:relative; z-index:2; padding: 0 80px 30px; max-width:65em;
 }
 .hero-tag {
   font-family:var(--font-corpo); font-size:var(--type-tag); color:var(--accent);
   letter-spacing:3px; text-transform:uppercase; margin-bottom:24px;
-  display:flex; align-items:center; padding-left: 1em;
+  display:flex; align-items:center; padding-left: 1em; line-height: 0.9;
 }
 
 .hero h1 {
   font-family:var(--font-corpo);
-  font-size:clamp(38px,8.5vw,128px);
+  font-size:clamp(24px, min(8.5vw, 8.5vh), 128px);
   color:var(--white); line-height:1; letter-spacing:2px; margin-bottom:32px;
 }
 .hero h1 em { font-style:normal; color:var(--accent); }
@@ -68,5 +68,8 @@ const optimizedHero = await getImage({
 
 @media (max-width: 900px) {
   .hero-content { padding: 0 24px 60px; }
+}
+@media (max-width: 480px) {
+  .hero-content { padding: 0 20px 48px; }
 }
 </style>

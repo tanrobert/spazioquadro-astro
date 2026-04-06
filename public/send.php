@@ -12,7 +12,7 @@ if (!empty($_POST['website'])) {
 }
 
 // Campi obbligatori
-$required = ['azienda', 'referente', 'email'];
+$required = ['azienda', 'referente', 'email', 'provincia', 'citta', 'indirizzo'];
 foreach ($required as $field) {
     if (empty(trim($_POST[$field] ?? ''))) {
         http_response_code(400);
@@ -22,11 +22,13 @@ foreach ($required as $field) {
 }
 
 // Sanitizzazione
-$azienda  = htmlspecialchars(trim($_POST['azienda']));
+$azienda   = htmlspecialchars(trim($_POST['azienda']));
 $referente = htmlspecialchars(trim($_POST['referente']));
 $telefono  = htmlspecialchars(trim($_POST['telefono'] ?? ''));
 $email     = filter_var(trim($_POST['email']), FILTER_SANITIZE_EMAIL);
-$zona      = htmlspecialchars(trim($_POST['zona'] ?? ''));
+$provincia = htmlspecialchars(trim($_POST['provincia']));
+$citta     = htmlspecialchars(trim($_POST['citta']));
+$indirizzo = htmlspecialchars(trim($_POST['indirizzo']));
 $tipo      = htmlspecialchars(trim($_POST['tipo'] ?? ''));
 $note      = htmlspecialchars(trim($_POST['note'] ?? ''));
 
@@ -43,7 +45,9 @@ $body .= "Azienda:        $azienda\n";
 $body .= "Referente:      $referente\n";
 $body .= "Email:          $email\n";
 $body .= "Telefono:       $telefono\n";
-$body .= "Zona:           $zona\n";
+$body .= "Provincia:      $provincia\n";
+$body .= "Città:          $citta\n";
+$body .= "Indirizzo:      $indirizzo\n";
 $body .= "Tipo attività:  $tipo\n";
 $body .= "Note:\n$note\n";
 
