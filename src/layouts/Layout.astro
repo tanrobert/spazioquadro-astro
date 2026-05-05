@@ -25,7 +25,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
   <meta property="og:url" content={canonical} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:image" content={new URL('/og-image.jpg', Astro.site)} />
+  <meta property="og:image" content={new URL('/og-image.png', Astro.site)} />
   <meta property="og:locale" content="it_IT" />
 
   <!-- Twitter Card -->
@@ -51,7 +51,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       "addressCountry": "IT"
     },
     "email": "info@spazioquadro.net",
-    "areaServed": "IT"
+    "areaServed": "IT",
+    "sameAs": [
+      "https://www.facebook.com/spazioquadro",
+      "https://www.instagram.com/spazio_quadro/",
+      "https://www.linkedin.com/company/spazioquadro/"
+    ]
   }
   </script>
 
@@ -113,7 +118,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         });
       }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
-      cardEls.forEach((el, i) => {
+      cardEls.forEach((el) => {
         const hEl = el as HTMLElement;
         hEl.dataset.init = '1';
         const siblings = hEl.parentElement ? Array.from(hEl.parentElement.children) : [];

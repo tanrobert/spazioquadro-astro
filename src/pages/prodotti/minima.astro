@@ -105,6 +105,7 @@ const finitureVetri = [
       "PORTA MINIMA è il sistema in vetro a profilo ridotto all'essenziale: minimalismo, luce e leggerezza in un unico prodotto. Il telaio sottilissimo scompare alla vista, il vetro diventa protagonista assoluto e la luce attraversa gli ambienti senza interruzioni.",
       "Ogni elemento è configurabile: vetro trasparente, satinato o colorato in massa; telaio nelle dimensioni e materiale; maniglie da una selezione di design contemporaneo; apertura a scelta tra battente, scorrevole, pivot o a libro. Un prodotto che parla da solo — il campione in showroom chiude da solo metà delle trattative.",
     ]}
+    brochure="/brochure_spazioquadro_minima.pdf"
   >
 
     <!-- SEZIONE 1: TIPOLOGIE APERTURA ANTA -->
@@ -239,13 +240,10 @@ const finitureVetri = [
     </div>
 
     <!-- LIGHTBOX -->
-    <div id="mn-lightbox" class="mn-lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita" hidden>
-      <button class="mn-lb-close" id="mn-lb-close" aria-label="Chiudi">&times;</button>
-      <div class="mn-lb-backdrop" id="mn-lb-backdrop"></div>
-      <div class="mn-lb-content">
-        <img src="" alt="" id="mn-lb-img" />
-      </div>
-    </div>
+    <dialog slot="extra" id="mn-lightbox" class="mn-lightbox" aria-label="Immagine ingrandita">
+      <button class="mn-lb-close" aria-label="Chiudi">&times;</button>
+      <img src="" alt="" id="mn-lb-img" />
+    </dialog>
 
   </ProductLayout>
   <Footer />
@@ -443,6 +441,7 @@ const finitureVetri = [
   flex-direction: column;
   align-items: center;
   gap: 12px;
+  width: 120px;
 }
 .mn-finitura-card img {
   width: 88px;
@@ -568,7 +567,7 @@ const finitureVetri = [
   overflow: hidden;
   display: block;
 }
-.mn-gal-item + .mn-gal-item { border-left: 1px solid rgba(0,0,0,0.18); }
+.mn-gal-item + .mn-gal-item { border-left: none; }
 .mn-gal-item img {
   width: 100%;
   height: 100%;
@@ -581,32 +580,25 @@ const finitureVetri = [
   filter: brightness(1.08);
 }
 
-/* ── Lightbox ── */
+/* ── Lightbox (dialog nativo) ── */
 .mn-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 9000;
+  border: none;
+  background: transparent;
+  padding: 0;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 100vw;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.mn-lightbox[hidden] { display: none; }
-.mn-lb-backdrop {
-  position: absolute;
-  inset: 0;
+.mn-lightbox::backdrop {
   background: rgba(0, 0, 0, 0.92);
   cursor: zoom-out;
 }
-.mn-lb-content {
-  position: relative;
-  z-index: 1;
-  max-width: 92vw;
-  max-height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.mn-lb-content img {
+.mn-lightbox[open] { display: flex; }
+.mn-lightbox img {
   max-width: 92vw;
   max-height: 90vh;
   width: auto;
@@ -616,13 +608,13 @@ const finitureVetri = [
   box-shadow: 0 24px 80px rgba(0,0,0,0.6);
 }
 .mn-lb-close {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 24px;
-  z-index: 2;
-  background: none;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.75);
   border: 1px solid rgba(255,255,255,0.3);
-  color: var(--white);
+  color: white;
   font-size: 28px;
   line-height: 1;
   width: 48px;
@@ -633,7 +625,7 @@ const finitureVetri = [
   justify-content: center;
   transition: background 0.2s, border-color 0.2s;
 }
-.mn-lb-close:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); }
+.mn-lb-close:hover { background: rgba(0, 0, 0, 0.95); border-color: rgba(255,255,255,0.6); }
 
 /* Su desktop tutti e 6 visibili: bottoni e dots non servono */
 @media (min-width: 1101px) {
@@ -651,7 +643,8 @@ const finitureVetri = [
   .mn-finiture-row { padding: 24px; }
   .mn-modelli-banner { margin: 16px 24px 0; padding: 16px 24px; }
   .mn-dettagli-body { grid-template-columns: 1fr; padding: 0 24px; }
-  .mn-dettagli-tech { border-left: none; border-right: none; border-top: 1px solid var(--border-input); border-bottom: 1px solid var(--border-input); flex-direction: row; justify-content: center; gap: 40px; }
+  .mn-dettagli-tech { border-left: none; border-right: none; border-top: 1px solid var(--border-input); border-bottom: 1px solid var(--border-input); flex-direction: row; justify-content: center; gap: 16px; }
+  .mn-dettagli-tech-img { width: min(120px, 33vw); height: min(120px, 33vw); }
   .mn-dettagli-testo { padding: 32px 24px; }
   .mn-vetri-row { padding: 40px 24px; gap: 24px 32px; }
 }
@@ -665,18 +658,17 @@ const finitureVetri = [
 }
 @media (max-width: 900px) {
   .mn-gallery-strip {
-    height: 260px;
-    overflow-x: auto;
-    scrollbar-width: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: auto;
+    overflow: visible;
+    gap: 0;
   }
-  .mn-gallery-strip::-webkit-scrollbar { display: none; }
   .mn-gal-item {
-    flex: 0 0 260px;
+    flex: none;
+    aspect-ratio: 4 / 3;
   }
-}
-@media (max-width: 480px) {
-  .mn-gallery-strip { height: 220px; }
-  .mn-gal-item { flex: 0 0 220px; }
+  .mn-gal-item + .mn-gal-item { border-left: none; }
 }
 </style>
 
@@ -742,37 +734,34 @@ const finitureVetri = [
 })();
 </script>
 
-<script is:inline>
-(function () {
-  var lightbox   = document.getElementById('mn-lightbox');
-  var lbImg      = document.getElementById('mn-lb-img');
-  var lbClose    = document.getElementById('mn-lb-close');
-  var lbBackdrop = document.getElementById('mn-lb-backdrop');
-  if (!lightbox || !lbImg || !lbClose || !lbBackdrop) return;
+<script>
+  const dialog = document.getElementById('mn-lightbox') as HTMLDialogElement | null;
+  const lbImg  = document.getElementById('mn-lb-img') as HTMLImageElement | null;
+  const lbClose = document.querySelector('.mn-lb-close') as HTMLButtonElement | null;
 
-  function open(src, alt) {
-    lbImg.src = src;
-    lbImg.alt = alt;
-    lightbox.hidden = false;
-    document.body.style.overflow = 'hidden';
-    lbClose.focus();
-  }
-  function close() {
-    lightbox.hidden = true;
-    lbImg.src = '';
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('.mn-gal-item').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      open(btn.dataset.full || '', btn.dataset.alt || '');
+  if (dialog && lbImg && lbClose) {
+    // Apri lightbox al click su ogni foto
+    document.querySelectorAll<HTMLButtonElement>('.mn-gal-item').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        lbImg.src = btn.dataset.full ?? '';
+        lbImg.alt = btn.dataset.alt ?? '';
+        dialog.showModal();
+        document.body.style.overflow = 'hidden';
+      });
     });
-  });
 
-  lbClose.addEventListener('click', close);
-  lbBackdrop.addEventListener('click', close);
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !lightbox.hidden) close();
-  });
-})();
+    // Chiudi cliccando sul backdrop (fuori dall'immagine)
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+
+    // Chiudi col bottone X
+    lbClose.addEventListener('click', () => dialog.close());
+
+    // Ripristina scroll e svuota src alla chiusura (ESC nativo + close())
+    dialog.addEventListener('close', () => {
+      lbImg.src = '';
+      document.body.style.overflow = '';
+    });
+  }
 </script>

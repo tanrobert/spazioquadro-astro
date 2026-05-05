@@ -13,9 +13,10 @@ interface Props {
   bgImage?: string;
   logo?: string;
   detailDescription?: string[];
+  brochure?: string;
 }
 
-const { tipo, nome, subtitle, paragraphs, specs, bgImage = '', logo, detailDescription } = Astro.props;
+const { tipo, nome, subtitle, paragraphs, specs, bgImage = '', logo, detailDescription, brochure } = Astro.props;
 ---
 
 <a class="back-btn" href="/#prodotti">← Torna ai Prodotti</a>
@@ -44,7 +45,10 @@ const { tipo, nome, subtitle, paragraphs, specs, bgImage = '', logo, detailDescr
       </div>
     ))}
     <div style="margin-top:32px;">
-      <a class="btn-primary" style="width:100%;text-align:center;display:block;" href="/#contatti">Richiedi Scheda Tecnica</a>
+      {brochure
+        ? <a class="btn-primary" style="width:100%;text-align:center;display:block;" href={brochure} target="_blank" rel="noopener">Scheda Tecnica</a>
+        : <a class="btn-primary" style="width:100%;text-align:center;display:block;" href="/#contatti">Richiedi Scheda Tecnica</a>
+      }
     </div>
   </div>
 </div>

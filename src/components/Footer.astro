@@ -4,9 +4,18 @@
       <div class="footer-logo"><img src="/spazioquadro-logo-nav.svg" alt=""></div>
       <p class="footer-tagline">Produzione italiana di serramenti top di gamma per rivenditori e professionisti. Gruppo Gelfù - Itri (LT) - Dal 1936.</p>
       <div class="footer-socials">
-        <a class="slink" href="#">in</a>
-        <a class="slink" href="#">ig</a>
-        <a class="slink" href="#">fb</a>
+        <a class="slink" href="https://www.facebook.com/spazioquadro" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <img src="/facebook-square.svg" alt="" loading="lazy" decoding="async" />
+        </a>
+        <a class="slink" href="https://www.instagram.com/spazio_quadro/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <img src="/instragram-square.svg" alt="" loading="lazy" decoding="async" />
+        </a>
+        <a class="slink" href="https://www.linkedin.com/company/spazioquadro/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <img src="/linkedin-square.svg" alt="" loading="lazy" decoding="async" />
+        </a>
+        <a class="slink" href="https://wa.me/393358176515" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <img src="/whatsapp-square.svg" alt="" loading="lazy" decoding="async" />
+        </a>
       </div>
     </div>
     <div class="footer-col">
@@ -68,13 +77,12 @@ footer {
 .footer-tagline { font-size:var(--type-small); line-height:1.7; color:var(--gray-mid); max-width:280px; }
 .footer-socials { display:flex; gap:10px; margin-top:20px; }
 .slink {
-  width:36px; height:36px; border:1px solid var(--gray-dark);
   display:flex; align-items:center; justify-content:center;
-  color:var(--gray-mid); text-decoration:none; font-size:var(--type-caption);
-  font-weight:600; transition:border-color 0.2s, color 0.2s;
-  font-family:var(--font-corpo);
+  text-decoration:none; transition:opacity 0.2s;
+  opacity:0.55;
 }
-.slink:hover { border-color:var(--accent); color:var(--accent); }
+.slink:hover { opacity:1; }
+.slink img { display:block; width:2em; height:2em; }
 .footer-col h4 {
   font-size:var(--type-label); font-weight:600; letter-spacing:2px;
   text-transform:uppercase; color:var(--white); margin-bottom:18px;
