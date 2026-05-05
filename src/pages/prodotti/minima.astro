@@ -28,8 +28,24 @@ import trasparenteFume from '../../assets/trasparente-fume.png';
 import satinatoGrigio from '../../assets/satinato-grigio-stopsol.png';
 import satinatoBronzo from '../../assets/satinato-bronzo.png';
 import stopsolBronzo from '../../assets/stopsol-bronzo.png';
+import galleria1Raw from '../../assets/minima-gallery-1.jpg';
+import galleria2Raw from '../../assets/minima-gallery-2.jpg';
+import galleriaDettaglioRaw from '../../assets/minima-gallery-dettaglio.jpg';
+import galleriaCoverRaw from '../../assets/minima-gallery-cover.jpg';
+import galleriaCover2Raw from '../../assets/minima-gallery-cover-2.jpg';
 
 const optimizedHero = await getImage({ src: heroImg, format: 'webp', quality: 100, width: 1920 });
+
+const galleryImages = await Promise.all([
+  { raw: galleria1Raw,        alt: 'Porta MINIMA — ambiente 1' },
+  { raw: galleria2Raw,        alt: 'Porta MINIMA — ambiente 2' },
+  { raw: galleriaDettaglioRaw,alt: 'Porta MINIMA — dettaglio anta' },
+  { raw: galleriaCoverRaw,    alt: 'Porta MINIMA — dettaglio cover' },
+  { raw: galleriaCover2Raw,   alt: 'Porta MINIMA — dettaglio cover 2' },
+].map(async (item) => {
+  const full = await getImage({ src: item.raw, format: 'webp', quality: 92 });
+  return { ...item, fullSrc: full.src };
+}));
 
 const aperture = [
   { foto: battente, icon: '/battente.svg', label: 'A Battente' },
@@ -203,6 +219,32 @@ const finitureVetri = [
         ))}
       </div>
       <p class="mn-finiture-note">Colorazioni alternative disponibili su richiesta</p>
+    </div>
+
+    <!-- SEZIONE 6: GALLERY -->
+    <div slot="extra" class="mn-gallery">
+      <div class="mn-gallery-strip">
+        {galleryImages.map((item) => (
+          <button
+            class="mn-gal-item"
+            data-full={item.fullSrc}
+            data-alt={item.alt}
+            aria-label={`Visualizza ingrandita: ${item.alt}`}
+            type="button"
+          >
+            <Image src={item.raw} alt={item.alt} width={800} height={600} loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div id="mn-lightbox" class="mn-lightbox" role="dialog" aria-modal="true" aria-label="Immagine ingrandita" hidden>
+      <button class="mn-lb-close" id="mn-lb-close" aria-label="Chiudi">&times;</button>
+      <div class="mn-lb-backdrop" id="mn-lb-backdrop"></div>
+      <div class="mn-lb-content">
+        <img src="" alt="" id="mn-lb-img" />
+      </div>
     </div>
 
   </ProductLayout>
@@ -507,6 +549,92 @@ const finitureVetri = [
 .mn-vetri .mn-finitura-label { color: var(--black); }
 .mn-vetri .mn-finiture-note { color: var(--text-dim); }
 
+/* ── Sezione 6: Gallery ── */
+.mn-gallery { background: var(--black); }
+.mn-gallery-strip {
+  display: flex;
+  width: 100%;
+  height: clamp(260px, 40vw, 560px);
+  overflow: hidden;
+}
+.mn-gal-item {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+  overflow: hidden;
+  display: block;
+}
+.mn-gal-item + .mn-gal-item { border-left: 1px solid rgba(0,0,0,0.18); }
+.mn-gal-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s ease, filter 0.55s ease;
+}
+.mn-gal-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.08);
+}
+
+/* ── Lightbox ── */
+.mn-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mn-lightbox[hidden] { display: none; }
+.mn-lb-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  cursor: zoom-out;
+}
+.mn-lb-content {
+  position: relative;
+  z-index: 1;
+  max-width: 92vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mn-lb-content img {
+  max-width: 92vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+}
+.mn-lb-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 2;
+  background: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--white);
+  font-size: 28px;
+  line-height: 1;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.mn-lb-close:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.6); }
+
 /* Su desktop tutti e 6 visibili: bottoni e dots non servono */
 @media (min-width: 1101px) {
   .mn-car-btn, .mn-car-dots { display: none; }
@@ -534,6 +662,21 @@ const finitureVetri = [
   .mn-carousel-track { grid-auto-columns: 100%; }
   .mn-aperture-grid { grid-template-columns: 1fr; }
   .mn-car-btn { display: none; }
+}
+@media (max-width: 900px) {
+  .mn-gallery-strip {
+    height: 260px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .mn-gallery-strip::-webkit-scrollbar { display: none; }
+  .mn-gal-item {
+    flex: 0 0 260px;
+  }
+}
+@media (max-width: 480px) {
+  .mn-gallery-strip { height: 220px; }
+  .mn-gal-item { flex: 0 0 220px; }
 }
 </style>
 
@@ -596,5 +739,40 @@ const finitureVetri = [
   }
 
   startAuto();
+})();
+</script>
+
+<script is:inline>
+(function () {
+  var lightbox   = document.getElementById('mn-lightbox');
+  var lbImg      = document.getElementById('mn-lb-img');
+  var lbClose    = document.getElementById('mn-lb-close');
+  var lbBackdrop = document.getElementById('mn-lb-backdrop');
+  if (!lightbox || !lbImg || !lbClose || !lbBackdrop) return;
+
+  function open(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lightbox.hidden = false;
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+  function close() {
+    lightbox.hidden = true;
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.mn-gal-item').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      open(btn.dataset.full || '', btn.dataset.alt || '');
+    });
+  });
+
+  lbClose.addEventListener('click', close);
+  lbBackdrop.addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !lightbox.hidden) close();
+  });
 })();
 </script>

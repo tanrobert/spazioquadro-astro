@@ -33,16 +33,21 @@
       <h4>Contatti</h4>
       <ul>
         <li><a href="/#contatti">Diventa Rivenditore</a></li>
-        <li><a href="mailto:info@spazioquadro.it">info@spazioquadro.it</a></li>
-        <li><a href="#">Itri (LT) - Italia</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Note Legali</a></li>
+        <li><a href="mailto:info@spazioquadro.net">info@spazioquadro.net</a></li>
+        <li class="footer-legal"><a href="/privacy-policy">Cookie &amp; Privacy Policy</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2025 SPAZIO QUADRO - Gruppo Gelfù S.r.l.</span>
-    <span>Made in Italy · Itri (LT)</span>
+    <span>© {new Date().getFullYear()} SpazioQuadro Porte e Finestre - Gruppo Gelfù S.r.l.</span>
+    <span class="footer-author">
+      Realizzato da
+      <a href="https://robertotanasi.it" target="_blank" rel="noopener noreferrer" aria-label="Roberto Tanasi — Grafica e Web" class="footer-author-link">
+        <svg class="footer-author-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" aria-hidden="true">
+          <path fill="currentColor" d="M400,130.9C400,58.6,341.4,0,269.1,0H0v400h152.9v-152.9l70.6,152.9h176.5l-70.6-152.9c41.9-21.8,70.6-65.7,70.6-116.2Z"/>
+        </svg>
+      </a>
+    </span>
   </div>
 </footer>
 
@@ -81,11 +86,23 @@ footer {
   transition:color 0.2s; cursor:pointer;
 }
 .footer-col ul li a:hover { color:var(--white); }
+.footer-legal { margin-top:10px; }
 .footer-bottom {
   padding-top:28px; border-top:1px solid var(--gray-dark);
-  display:flex; justify-content:space-between; font-size:var(--type-tag);
-  color:var(--text-dim-dark); font-family:var(--font-corpo);
+  display:flex; justify-content:space-between; align-items:center;
+  font-size:var(--type-tag); color:var(--text-dim-dark); font-family:var(--font-corpo);
 }
+.footer-author {
+  display:flex; align-items:center; gap:10px;
+  font-size:var(--type-tag); color:var(--text-dim-dark);
+}
+.footer-author-link {
+  display:flex; align-items:center;
+  color:rgba(255,255,255,0.35);
+  transition:color 0.2s;
+}
+.footer-author-link:hover { color:#f23e23; }
+.footer-author-logo { height:18px; width:auto; }
 
 @media (max-width: 1100px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap:40px; }

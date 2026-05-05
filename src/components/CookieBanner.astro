@@ -1,0 +1,154 @@
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Informativa sui cookie" aria-live="polite">
+  <div class="cb-text">
+    <p>
+      Questo sito usa <strong>Google Analytics</strong> per statistiche anonime sulla navigazione.
+      Puoi accettare o rifiutare i cookie non essenziali.
+      <a href="/privacy-policy">Cookie &amp; Privacy Policy</a>
+    </p>
+  </div>
+  <div class="cb-actions">
+    <button id="cb-reject" class="cb-btn cb-btn--reject">Rifiuta</button>
+    <button id="cb-accept" class="cb-btn cb-btn--accept">Accetta</button>
+  </div>
+</div>
+
+<script>
+  const CONSENT_KEY = 'sq_cookie_consent';
+  const GA_ID = 'G-XXXXXXXXXX'; // sostituire con ID reale
+
+  function loadGA() {
+    if (document.getElementById('ga-script')) return;
+    const s = document.createElement('script');
+    s.id = 'ga-script';
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(s);
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    function gtag(...args: any[]) { window.dataLayer.push(args); }
+    // @ts-ignore
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID, { anonymize_ip: true });
+  }
+
+  function hideBanner() {
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.classList.add('cb-hidden');
+      setTimeout(() => { banner.style.display = 'none'; }, 350);
+    }
+  }
+
+  function initBanner() {
+    const consent = localStorage.getItem(CONSENT_KEY);
+
+    if (consent === 'accepted') {
+      loadGA();
+      hideBanner();
+      return;
+    }
+    if (consent === 'rejected') {
+      hideBanner();
+      return;
+    }
+
+    // Nessuna scelta ancora: mostra il banner
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.style.display = 'flex';
+
+    document.getElementById('cb-accept')?.addEventListener('click', () => {
+      localStorage.setItem(CONSENT_KEY, 'accepted');
+      loadGA();
+      hideBanner();
+    });
+
+    document.getElementById('cb-reject')?.addEventListener('click', () => {
+      localStorage.setItem(CONSENT_KEY, 'rejected');
+      hideBanner();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initBanner);
+  document.addEventListener('DOMContentLoaded', initBanner);
+</script>
+
+<style>
+.cookie-banner {
+  display: none; /* mostrato via JS solo se necessario */
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9998;
+  background: var(--black);
+  border: 1px solid var(--gray-dark);
+  padding: 20px 28px;
+  max-width: 680px;
+  width: calc(100% - 48px);
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+  transition: opacity 0.3s, transform 0.3s;
+}
+.cookie-banner.cb-hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(12px);
+}
+.cb-text {
+  flex: 1;
+}
+.cb-text p {
+  font-size: var(--type-small);
+  color: var(--gray-mid);
+  line-height: 1.6;
+  margin: 0;
+}
+.cb-text strong { color: var(--white); }
+.cb-text a {
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cb-text a:hover { opacity: 0.75; }
+.cb-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.cb-btn {
+  font-family: var(--font-corpo);
+  font-size: var(--type-label);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 22px;
+  border: 1px solid var(--gray-dark);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  background: transparent;
+  color: var(--gray-mid);
+}
+.cb-btn--reject:hover {
+  border-color: var(--white);
+  color: var(--white);
+}
+.cb-btn--accept {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+.cb-btn--accept:hover {
+  background: transparent;
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .cookie-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    bottom: 16px;
+  }
+}
+</style>
